@@ -47,7 +47,6 @@ When these layers conflict, trust the files first, then flag the conflict.
 ```
 .claude/skills
 00 Inbox/
-  Clippings/
 00 System/
   Templates/
   Readmes/
@@ -81,9 +80,7 @@ When these layers conflict, trust the files first, then flag the conflict.
 
 ### Folder roles
 
-**`00 Inbox/`** — raw dump zone. Unprocessed thoughts, captures, observations. No structure required. Processed weekly. Everything new lands here first. Contains two types of input:
-- **Raw captures** — fleeting thoughts, things noticed, ideas to evaluate, journal entries, pattern observations. Written freely, especially from mobile via Obsidian. No format required.
-- `Clippings/` — web articles saved via Obsidian's web clipper. Files are pre-structured with frontmatter (`title`, `source`, `author`, `published`, `created`, `description`, `tags: clippings`) and contain the full article body. Clippings are a distinct input type from raw captures — they require different processing during synthesis.
+**`00 Inbox/`** — flat dump zone. No subfolders, no pre-sorting. Everything new lands here first: fleeting thoughts, captures, observations, web clippings, feedback, journal entries, meeting notes, research scratches. No structure required. The synthesis agent determines input type from frontmatter, tags, or semantic content. Processed weekly.
 
 **`00 System/`** — vault infrastructure. Templates, folder documentation, and other operating-layer files. Not personal content — this is the operating layer of the system itself.
 - `Templates/` — blank templates for new entries, including Obsidian Templater templates with `<% ... %>` syntax. This is where Obsidian and Templater are configured to look for templates.
@@ -133,19 +130,18 @@ When classifying or moving a note, use this routing logic. Prefer explicit reaso
 
 Once a week, open a session and say "let's do the weekly synthesis." Agent reads `00 Inbox/`, triages each note, proposes updates to the correct files, and moves processed notes to `90 Archive/YYYY-MM/`. See `00 System/Templates/Weekly Synthesis.md` for the full agenda.
 
-**Processing raw inbox notes** — for each file directly in `00 Inbox/`, apply this 4-way decision tree:
+**Processing `00 Inbox/` files** — for each file directly in `00 Inbox/` (flat, no subfolders), determine input type from frontmatter, tags, or content. If the note contains tags (e.g., `#feedback`, `#journal`, `#clipping`, `#idea`) or labels in the body, treat them as explicit routing signals and factor them into the decision tree.
 
-1. **Capture** (fleeting thought, observation, idea worth evaluating) → distill into the right `01 World Model/`, `02 Wiki/`, or `04 Decisions/` file. Archive the original with `processed_into:` listing destinations.
-2. **Source material** (meeting notes, podcast takeaway, chat output, research scratch) → distill any insight to the right file first. Then ask: will I re-read this source itself? If yes, move to `03 Sources/{subfolder}/`. If no, archive with `processed_into:`. Source preservation is the exception, not the default.
+Then apply the appropriate branch of this 4-way decision tree:
+
+1. **Capture** (fleeting thought, observation, idea worth evaluating, feedback received) → distill into the right `01 World Model/`, `02 Wiki/`, or `04 Decisions/` file. Archive the original with `processed_into:` listing destinations.
+   - *Feedback* is a capture variant: external perspectives on you or your work. Often maps to `01 World Model/` (state updates, rule adjustments) or `02 Wiki/People/` (relationship patterns).
+2. **Source material** (meeting notes, podcast takeaway, chat output, research scratch, web clippings) → distill any insight to the right file first. Then ask: will I re-read this source itself? If yes, move to `03 Sources/{subfolder}/`. If no, archive with `processed_into:`. Source preservation is the exception, not the default.
+   - *Clippings* are a source material variant: pre-structured external articles with frontmatter (`title`, `source`, `author`, `published`, `created`, `description`, `tags: clippings`). Read the article body, identify the key insight, then decide destination: `02 Wiki/`, `01 World Model/03 Contexts/`, `03 Sources/Articles/`, or archive.
 3. **Journal entry** (reflection, processing, thinking out loud) → synthesize if ready; leave if it needs to settle. Archive only after synthesis with `processed_into:`.
 4. **Noise** (no extractable signal) → archive directly. No `processed_into:` field — its absence flags the note as either noise or under-processed.
 
-**Processing clippings** (`00 Inbox/Clippings/`) — clippings are pre-structured external content, not personal captures. Process each one by:
-1. Reading the article and identifying the key insight or pattern.
-2. Deciding the destination: `02 Wiki/` if it's a distillable, evergreen concept worth keeping; a `01 World Model/03 Contexts/` update if it maps to a recurring decision pattern; `03 Sources/Articles/` if the article itself is worth archiving; or just archive if it was useful context but adds nothing permanent.
-3. Proposing the update (or noting there's nothing to extract), then moving the file to `90 Archive/YYYY-MM/`.
-
-Do not treat clippings as raw thought — they are input material to extract from, not personal state to preserve.
+Do not treat clippings or feedback as raw thought — they are input material to extract from, not personal state to preserve.
 
 The synthesis is the mechanism that makes the system compound. Without it, the inbox fills and the World Model goes stale.
 
