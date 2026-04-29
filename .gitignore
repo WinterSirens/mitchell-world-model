@@ -1,0 +1,8 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Obsidian workspace state (open tabs, cursor position, etc.)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json

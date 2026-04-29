@@ -1,0 +1,11 @@
+{
+  "name": "email-sequence",
+  "description": "Turn unstructured thoughts into fully drafted, ready-to-use emails and save them to Notion. Also builds multi-email sequences with timing, branching, and benchmarks. Use this skill whenever the user shares an email concept, topic, or rough idea they want drafted into a complete email. Also use for drip campaigns, nurture flows, onboarding series, or any multi-email sequence. Triggers on \"email idea\", \"draft an email about\", \"write an email on\", \"email concept\", \"newsletter about\", \"I want to write about\", or any mention of creating email content for the AI SHIFT Method, PLF launch, or nurture sequences. If the user says \"capture this\" or \"save this idea\" without mentioning email, that belongs to the notion-capture skill instead.",
+  "version": "2.0.0",
+  "skills": [
+    {
+      "name": "email-sequence",
+      "path": "SKILL.md"
+    }
+  ]
+}
