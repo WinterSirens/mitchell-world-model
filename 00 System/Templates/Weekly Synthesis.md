@@ -4,7 +4,7 @@ use: Weekly synthesis session — open this and say "let's do the weekly synthes
 ---
 ## How to use this template
 Open a new Claude session in this project and say: "let's do the weekly synthesis."
-Claude will read the inbox, triage each note, propose file updates, and move processed notes to the archive.
+Claude will read the inbox, triage each note, propose Goldilocks distillations, and move processed notes to the archive unless a source truly deserves preservation.
 You approve, adjust, or skip each item. The whole pass should take 20-30 minutes.
 
 ---
@@ -14,20 +14,27 @@ You approve, adjust, or skip each item. The whole pass should take 20-30 minutes
 ### 1. Inbox triage (Claude reads 00 Inbox/)
 Claude reads every file in the inbox, then for each one asks:
 
-**Step A — Mode check:** "Is this a capture or a journal entry?"
+**Step A — Mode check:** "Is this a capture, journal entry, source material, or noise?"
 - Captures are ready to process immediately
 - Journal entries get Step B first
+- Source material gets distilled first; preserve the original only with a named re-retrieval reason
+- Noise can archive directly
 
 **Step B — Readiness check (journal entries only):** "Is this ready for synthesis, or do you want to let it sit longer?"
 - If ready: process it now
 - If not ready: leave it in the inbox untouched, revisit next week
 
-**Step C — Triage (captures + ready journal entries):** For each item ready to process, Claude proposes one of:
-- **→ Rule**: Add or update a rule in `02 Rules/Decision Rules.md`
-- **→ Situation**: Add to or create a file in `03 Situations/`
-- **→ State update**: Update `01 State/Current State.md`
-- **→ Review log**: Add a decision or reflection to `04 Reviews/`
+**Step C — Triage (captures + ready journal entries + source material):** For each item ready to process, Claude proposes one of:
+- **→ Rule**: Add or update a rule in `01 World Model/02 Rules/Decision Rules.md`
+- **→ Context**: Add to or create a file in `01 World Model/03 Contexts/`
+- **→ State update**: Update `01 World Model/01 State/Current State.md`
+- **→ Review log**: Add a decision or reflection to `01 World Model/04 Reviews/`
+- **→ Wiki concept**: Add or update a distilled evergreen note in `02 Wiki/`
+- **→ Active decision artifact**: Add or update a memo, plan, or brief in `04 Decisions/`
+- **→ Source preservation**: Move to `03 Sources/` only if the original will likely be re-read
 - **→ Archive only**: No durable learning, just move it out
+
+Every archived processed note gets `processed_into:` frontmatter listing the destination file(s). Missing `processed_into:` means either noise or possible under-processing.
 
 ### 2. State check
 Answer these to update Current State.md:
@@ -45,9 +52,9 @@ Answer these to update Current State.md:
 - What situation file is missing that keeps coming up?
 
 ### 5. Close
-- Claude archives processed inbox notes to `06 Archive/YYYY-MM/`
-- Replace the `inbox` label with `Archived`tag from the `tags` field property from each note archived
-- Claude proposes any CLAUDE.md updates if the system itself needs to change
+- Claude archives processed inbox notes to `90 Archive/YYYY-MM/`
+- Replace the `inbox` tag with `archived` in each archived note
+- Claude proposes any `AGENTS.md` updates if the system itself needs to change
 - Note what got smarter this week
 
 ---

@@ -9,6 +9,8 @@ description: When Fernando Pessagno got fired, he left the corporate world behin
 tags:
   - clippings
   - archive
+processed_into:
+  - 02 Wiki/Concepts/Solo Building - Zombie Projects and Domain Fit.md
 ---
 *Fernando Pessagno got fired in 2023 and used his newfound free time to build niche tools. Since then, his* [*portfolio*](http://aicarousels.com/) *of design products has brought in over $500k in revenue.*
 

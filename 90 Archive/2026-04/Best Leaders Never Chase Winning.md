@@ -7,6 +7,8 @@ source: Perplexity
 energy:
 review:
 url:
+processed_into:
+  - 02 Wiki/Concepts/Leadership - Process Over Winning.md
 ---
 ### 1. Shift the Focus Away From the "Win"
 

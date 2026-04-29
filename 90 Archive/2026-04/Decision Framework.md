@@ -1,14 +1,16 @@
 ---
 created: 2026-04-28
+archived: 2026-04-29
 tags:
-  - inbox
+  - archived
   - decision-making
-  - raw
 aliases:
 source:
 energy:
 review:
-type: Decision Framework
+type: research-trigger
+processed_into:
+  - 04 Decisions/Active Plans/Follow-Up Cadence Framework — Research Plan.md
 ---
 **Trigger:** I need a framework I can follow, that I can trust, that allows me to follow up with confidence and not question if I'm being overbearing. 
 

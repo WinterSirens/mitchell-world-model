@@ -1,7 +1,7 @@
 ---
 type: rules
-updated: 2026-04-27
-version: 7
+updated: 2026-04-29
+version: 9
 status: active
 ---
 
@@ -111,6 +111,13 @@ Before making a decision or taking action at MX, run it through these seven ques
 - When energy or focus is low, avoid making large structural changes.
 - Use lower-energy periods for cleanup, review, or clarification rather than ambitious redesign.
 
+### Self-validation filter (provisional, added 2026-04-29)
+Two questions to apply before saying yes to (or doubling down on) an effort, relationship, or audience:
+1. Is this helping me grow?
+2. Am I contributing with my efforts?
+
+Origin frame: *"Givers sleep well, takers eat well."* From therapy 2026-04-27 — naming the want-to-be-validated pattern. Mitchell would rather sleep well than eat well. Pair with the existing "Validation pull" risk in `Current State.md` and the Marily counter-arguments. Promote to durable once consistent application surfaces evidence across multiple decisions.
+
 ---
 
 ## Invalidated or revised rules
@@ -127,3 +134,4 @@ Use this section to track rules that are no longer trustworthy or that were repl
 - 2026-04-24: Revised lead magnet sequencing — narrowed to smallest viable version (video + asset + page + delivery email). Nurture sequence deliberately postponed until conversion is proven. Wedge workflow decision identified as the true blocker. Backed by founder memo research. (v6)
 - 2026-04-27: Annotated lead magnet sequencing — lead magnet is now a close follow behind the Marily workshop pitch; same wedge workflow decision unblocks both. Added provisional rule: distribution leverage filter (when warm distribution channels appear, accept under conditions; v1 artifact must be cheap; check for validation-seeking). Surfaced from the 2026-04-27 Marily decision. (v7)
 - 2026-04-27: Promoted "sit on it" to Step 0 of the Opportunity filter — 24-hour cooling period before any evaluation, research, or discussion. Added matching Step 0 and agent behavior section to New Opportunity context. Surfaced from Matt West decision (excitement faded after sitting on it; 24h was enough). (v8)
+- 2026-04-29: Added provisional rule: self-validation filter (two-question check — is this helping me grow? am I contributing?). Surfaced from 2026-04-27 therapy session naming the want-to-be-validated pattern. Pairs with existing "Validation pull" risk and Marily counter-arguments. (v9)

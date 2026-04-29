@@ -45,7 +45,7 @@ A structured Obsidian vault that serves as a personal operating system: tracking
   People/
   Themes/
   Syntheses/
-03 Sources/              # Upstream inputs and raw research
+03 Sources/              # Preserved upstream inputs with a re-retrieval reason
   Articles/
   Podcasts/
   Meetings/
@@ -55,14 +55,14 @@ A structured Obsidian vault that serves as a personal operating system: tracking
   Weekly Briefs/
   Decision Memos/
   Active Plans/
-90 Archive/              # Processed inbox notes, organized by YYYY-MM/
+90 Archive/              # Processed originals after distillation, organized by YYYY-MM/
 Personal World Model/    # Required by Cowork plugin — do not rename or move
 ```
 
 ## Key workflows
 
 ### Weekly synthesis
-Open a new agent session and say **"let's do the weekly synthesis."** The agent reads `00 Inbox/`, triages each note, proposes updates to the correct files, and moves processed notes to `90 Archive/YYYY-MM/`. See `00 System/Templates/Weekly Synthesis.md` for the full agenda.
+Open a new agent session and say **"let's do the weekly synthesis."** The agent reads `00 Inbox/`, triages each note, proposes Goldilocks distillations to the correct files, and then either archives the processed original with `processed_into:` or preserves the source in `03 Sources/` only when there is a clear re-retrieval reason. See `00 System/Templates/Weekly Synthesis.md` for the full agenda.
 
 ### Decision support
 Share the decision context in a session. The agent reads `01 World Model/01 State/Current State.md` and `01 World Model/02 Rules/Decision Rules.md`, simulates YES / NO / WAIT options, recommends one action, and surfaces the strongest counterargument.
@@ -72,9 +72,12 @@ Share the decision context in a session. The agent reads `01 World Model/01 Stat
 |---|---|
 | About Mitchell (identity, goals, state, rules) | `01 World Model/` |
 | Durable synthesized knowledge | `02 Wiki/` |
-| Raw upstream material (articles, meetings, chats) | `03 Sources/` |
+| Raw upstream material worth re-reading | `03 Sources/` |
+| Processed originals after distillation | `90 Archive/YYYY-MM/` |
 | Changes what to do next (memos, plans, briefs) | `04 Decisions/` |
 | Unprocessed | `00 Inbox/` |
+
+The default is **distill, then archive**. `03 Sources/` is for upstream material whose original form is likely to be useful again — not a second archive.
 
 ## AI agent context
 

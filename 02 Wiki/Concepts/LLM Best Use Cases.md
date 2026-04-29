@@ -1,38 +1,49 @@
-| Model                                | Best For                                 | Notes / Example Use Case                                                                                                 |
-| ------------------------------------ | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| **claude 4.5 haiku**                 | Speed & volume at low cost               | Quick summarization, sorting survey responses, simple classification, first-pass idea filtering.                         |
-| **claude 4.5 sonnet**                | General everyday work                    | Drafting course outlines, writing emails, standard coding tasks, routine PM analysis.                                    |
-| **claude 4.5 sonnet (thinking)**     | Multi-step planning & logic              | Building a course curriculum structure, complex spreadsheet logic, strategic decision trees.                             |
-| **claude 4.5 opus**                  | Hardest tasks in the 4.5 line            | Deep research synthesis, challenging coding, long-form writing where quality matters most.                               |
-| **claude 4.5 opus (thinking)**       | Maximum reasoning (4.5 family)           | Scientific research, advanced math, highly nuanced strategy docs, PhD-level analysis.                                    |
-| **claude 4.6 sonnet**                | Reliable coding & agents                 | Production software builds, API integrations, tool-based automations, code review.                                       |
-| **claude 4.6 sonnet (max)**          | Large single-prompt coding/docs          | When you need the largest possible output or context window in a single 4.6 Sonnet call (e.g., ingesting a big repo).    |
-| **claude 4.6 opus**                  | Serious engineering + 1M context         | Autonomous bug fixing, large-scale refactoring, long-context research across entire codebases.                           |
-| **claude 4.6 opus (max)**            | Maximum long-context output              | Full-repo analysis, 500+ page document synthesis, agentic workflows that generate huge responses.                        |
-| **claude 4.7 opus**                  | Best-in-class coding & agents (Apr 2026) | Complex software projects, multi-agent coordination, autonomous coding, vision-heavy document analysis.                  |
-| **claude 4.7 opus (high)**           | Deep reasoning + coding                  | Debugging hard bugs, architectural decisions, research tasks that need extended step-by-step thinking.                   |
-| **claude 4.7 opus (max)**            | Largest possible context/output (4.7)    | When you need to analyze an entire codebase or massive report in one pass and get a huge structured answer.              |
-| **claude 4.7 opus (high) 50% off**   | Same as above, discounted                | Heavy experimentation, batch processing, or large jobs while the promotion is active.                                    |
-| **claude 4.7 opus 50% off**          | Same as 4.7 Opus, discounted             | Best value for flagship coding/agentic work if you are price-sensitive today.                                            |
-| **claude 4.7 opus (max) 50% off**    | Same as 4.7 Opus (max), discounted       | Bulk long-context tasks (e.g., analyzing 100 competitor pages) at half price.                                            |
-| **gemini 3.1 pro**                   | Massive document ingestion & value       | 2M-token context. Ingesting hundreds of PDFs, full competitor teardowns, bulk literature reviews, cheap bulk processing. |
-| **glm 5**                            | General bilingual (EN/CN) tasks          | Zhipu AI generalist. Good for Chinese-language market research, local API usage, cost-sensitive everyday tasks.          |
-| **glm 5.1**                          | Stronger bilingual & general reasoning   | Updated GLM. Use over GLM 5 for harder coding, math, or when you need better instruction following in Chinese/English.   |
-| **gpt-5.2 (low reasoning)**          | Fast chat & simple tasks                 | Quick answers, formatting, rewriting a paragraph, simple data extraction.                                                |
-| **gpt-5.2 (medium reasoning)**       | Standard writing & analysis              | Brainstorming, blog drafts, competitive summaries, basic course content generation.                                      |
-| **gpt-5.2 (high)**                   | Deep reasoning & synthesis               | Multi-source market research, strategic planning, complex report writing.                                                |
-| **gpt-5.2 (xhigh)**                  | Hardest logic & science                  | Advanced math, physics, algorithm proofs, scientific discovery, maximum reasoning tasks.                                 |
-| **gpt-5.2 codex (low reasoning)**    | Quick coding assistance                  | Fast autocomplete, simple scripts, regex, one-off snippets.                                                              |
-| **gpt-5.2 codex (medium reasoning)** | Everyday software engineering            | Feature implementation, standard debugging, writing unit tests.                                                          |
-| **gpt-5.2 codex (high reasoning)**   | Complex code tasks                       | Refactoring across files, architectural decisions, test-suite generation.                                                |
-| **gpt-5.2 codex (xhigh reasoning)**  | Deepest code reasoning                   | Legacy code migration, complex algorithm design, deepest debugging sessions.                                             |
-| **gpt-5.3 codex (low reasoning)**    | Faster coding than 5.2                   | Use over 5.2 Codex for quick scripting when you want a slightly newer model.                                             |
-| **gpt-5.3 codex (medium reasoning)** | Standard coding (newer Codex)            | General dev work; prefer over 5.2 Codex for better overall code quality.                                                 |
-| **gpt-5.3 codex (high reasoning)**   | Hard coding (newer Codex)                | Complex features, cross-file debugging; prefer over 5.2 for harder problems.                                             |
-| **gpt-5.3 codex (xhigh reasoning)**  | Maximum code reasoning (pre-5.4)         | Algorithmic challenges, massive refactors; the deepest reasoning before the 5.4 line.                                    |
-| **gpt-5.4 (low reasoning)**          | Fast general-purpose GPT                 | Quick PM tasks, chat, formatting, routing, simple classification.                                                        |
-| **gpt-5.4 (medium reasoning)**       | Standard knowledge work                  | Drafting PRDs, general market analysis, course scripting, everyday research.                                             |
-| **gpt-5.4 (high)**                   | Deep market research & web synthesis     | Best for live web research, multi-page synthesis, BrowseComp leader. Use for competitor intel & pricing analysis.        |
-| **gpt-5.4 (xhigh)**                  | Maximum reasoning & computer use         | Scientific research, desktop automation, hardest analytical problems, complex financial modeling.                        |
-| **kimi k2.5**                        | Long-context on a budget                 | Reading entire books, large document sets, coding; cheaper alternative for bulk research.                                |
-| **kimi k2.6**                        | Long-context reasoning leader            | 256K+ context, 1T MoE. Best for massive codebase Q&A, h                                                                  |
+---
+type: brain
+created: 2026-04-27
+updated: 2026-04-29
+tags:
+  - ai
+  - llm
+  - warp
+  - model-routing
+sources:
+  - Warp docs — Model choice
+  - Artificial Analysis — GPT-5.5 is the new leading AI model, 2026-04-23
+  - Current Warp session — GPT-5.5 available, 2026-04-29
+---
+# LLM Best Use Cases
+
+## Core rule
+Route by task, not by model prestige. Default to the cheapest/fastest model that can reliably do the job, and escalate only when the task has high ambiguity, high consequence, large context, or difficult tool use.
+
+## Warp defaults
+- **Auto (Responsive)** — Use when you want Warp to balance speed and quality without thinking about model choice.
+- **Auto (Cost-efficient)** — Use for cleanup, summarization, formatting, low-stakes drafts, and repeated tasks where cost matters.
+- **Auto (Genius)** — Use for deep debugging, architecture, hard decisions, `/plan`-style work, and anything where picking the wrong model costs more than credits.
+
+## Manual routing
+- **Claude Opus 4.7** — Hardest coding, agentic workflows, multi-file refactors, architecture decisions, long-context repository work, and tasks where hallucination avoidance matters.
+- **Claude Opus 4.7 high/max** — Use when normal Opus is not enough: deep debugging, messy legacy code, high-stakes synthesis, or huge-context analysis.
+- **Claude Sonnet 4.6** — Everyday engineering default: feature work, API integrations, tests, code review, and reliable implementation without Opus-level cost.
+- **Claude Haiku 4.5** — Fast, low-risk volume work: classification, simple summaries, extraction, formatting, and first-pass cleanup.
+- **GPT-5.4 high/xhigh** — Research-heavy reasoning, web synthesis, strategy, complex analysis, and tasks where OpenAI-style persistence is useful.
+- **GPT-5.4 low/medium** — Standard writing, PM analysis, quick reasoning, and general knowledge work.
+- **GPT-5.5 high/xhigh** — Current frontier reasoning in Warp. Use for hardest strategy, synthesis, multi-step planning, complex research, and tool-heavy tasks where the extra intelligence matters.
+- **GPT-5.5 low/medium** — Strong general reasoning tier. Use when you want better-than-5.4 quality without automatically jumping to maximum effort.
+- **GPT-5.3 / GPT-5.2 Codex** — Coding throughput, parallelizable code tasks, scripts, tests, and when OpenAI Codex behavior fits the repo better.
+- **Gemini 3.1 Pro** — Massive document ingestion, long-context research, multimodal analysis, and cost-sensitive synthesis across many files.
+- **GLM 5 / Kimi K2.5** — Budget hosted models for lower-stakes long-context or bilingual work when frontier accuracy is not required.
+
+## April 2026 benchmark watchlist
+- Artificial Analysis ranks **GPT-5.5 (xhigh)** as the external intelligence leader at score 60, ahead of Claude Opus 4.7 (max), Gemini 3.1 Pro Preview, and GPT-5.4 (xhigh) at 57.
+- GPT-5.5 is available in the current Warp session even though the docs checked on 2026-04-29 lagged behind the live product. Treat live model picker/session evidence as stronger than stale docs.
+- GPT-5.5's headline score has a caveat: Artificial Analysis reports very high AA-Omniscience hallucination rate versus Claude Opus 4.7 and Gemini 3.1 Pro. For fact-sensitive work, prefer models that abstain rather than guess, and require citations/web checks.
+- GPT-5.5 medium reportedly matches Claude Opus 4.7 max on the Intelligence Index at lower benchmark-run cost, so watch for it as a future high-value general reasoning tier.
+- Kimi K2.6 and MiMo-V2.5-Pro are strong external value models, but they should not be added to the Warp routing table unless available in Warp.
+
+## Weekly update procedure
+1. Check Warp model picker/current session first, then docs. If docs conflict with live availability, trust live availability and note the conflict.
+2. Check Artificial Analysis for external leaders, speed, context, and cost.
+3. Update this note only with the decision-relevant delta: what to use, when to use it, and what caveat matters.
+4. Archive the source clipping with `processed_into:`. Do not preserve raw benchmark dumps unless the methodology itself needs re-reading.

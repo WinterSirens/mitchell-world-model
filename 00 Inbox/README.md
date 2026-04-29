@@ -4,11 +4,13 @@ type: inbox
 ## What this folder is
 The raw dump zone. No structure required. Write anything here — fleeting thoughts, things you noticed, article takeaways, decisions you made informally, ideas you want to evaluate, frustrations, questions, observations.
 
-## Two modes of writing — both belong here
+## Three modes of writing — all belong here
 
 **Captures** — quick observations, things you noticed, ideas to evaluate, articles that changed your thinking. Usually short. Often a sentence or a few bullets. Ready to process as soon as you write them.
 
 **Journal entries** — reflections, processing, thinking out loud about a decision, a week, a feeling, a friction point. Usually longer. These benefit from sitting a few days before synthesis — a thought written Monday often looks different by Friday.
+
+**Source material** — article clippings, meeting notes, podcast takeaways, chat outputs, research scratch, or anything upstream that may contain reusable signal.
 
 No tagging required. Write freely, especially on mobile. The weekly synthesis session handles the distinction interactively.
 
@@ -28,11 +30,12 @@ No tagging required. Write freely, especially on mobile. The weekly synthesis se
 ## How it works
 1. Write anything here, any time, any format — especially from your phone via Obsidian mobile
 2. Once a week, open a Claude session and say "let's do the weekly synthesis"
-3. Claude reads everything in the inbox, then asks you: capture or journal entry?
-4. For journal entries, Claude asks: ready for synthesis, or do you want to let it sit longer?
-5. Captures get processed immediately. Ready journal entries get synthesized. Unready journal entries stay in the inbox untouched.
-6. Processed notes move to `90 Archive/YYYY-MM/`
-7. The World Model gets smarter
+3. Claude reads everything in the inbox and applies the routing question: capture, journal entry, source material, or noise?
+4. The first-class output is a Goldilocks distillation into `01 World Model/`, `02 Wiki/`, or `04 Decisions/` — not preservation for its own sake.
+5. Source material moves to `03 Sources/` only when the original is likely to be re-read. Otherwise, the distilled learning goes to the right file and the source is archived.
+6. Processed notes move to `90 Archive/YYYY-MM/` with `processed_into:` frontmatter listing the destination files.
+7. Unready journal entries stay in the inbox untouched.
+8. The World Model gets smarter without bloating.
 
 ## Format
 No format required. No tags required. Title files by date or topic — whatever you'll actually do on your phone.

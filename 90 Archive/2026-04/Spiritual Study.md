@@ -7,6 +7,8 @@ aliases:
 source:
 energy: medium
 review:
+processed_into:
+  - 02 Wiki/Concepts/Scripture Study - Fuel Not Preparation.md
 ---
 # My Scripture Study Insights
 

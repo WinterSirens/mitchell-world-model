@@ -8,6 +8,10 @@ created: 2026-04-28
 description: "⚡Master Claude Code, Build Your Agency, Land Your First Client⚡https://www.skool.com/chase-ai🔥FREE community with the prompts🔥 https://www.skool.com/chase-ai-community💻 Need custom work? Book"
 tags:
   - "clippings"
+  - "archived"
+archived: 2026-04-29
+processed_into:
+  - 02 Wiki/Concepts/Impeccable - Frontend Design with Claude Code.md
 ---
 ![Impeccable + Claude Code](https://www.youtube.com/watch?v=0-AosS67IGU)
 

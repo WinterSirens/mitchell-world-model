@@ -133,7 +133,12 @@ When classifying or moving a note, use this routing logic. Prefer explicit reaso
 
 Once a week, open a session and say "let's do the weekly synthesis." Agent reads `00 Inbox/`, triages each note, proposes updates to the correct files, and moves processed notes to `90 Archive/YYYY-MM/`. See `00 System/Templates/Weekly Synthesis.md` for the full agenda.
 
-**Processing raw inbox notes** — for each file directly in `00 Inbox/`, ask: capture or journal entry? Captures get processed immediately. Journal entries get synthesized if ready, or left untouched if they need more time to settle.
+**Processing raw inbox notes** — for each file directly in `00 Inbox/`, apply this 4-way decision tree:
+
+1. **Capture** (fleeting thought, observation, idea worth evaluating) → distill into the right `01 World Model/`, `02 Wiki/`, or `04 Decisions/` file. Archive the original with `processed_into:` listing destinations.
+2. **Source material** (meeting notes, podcast takeaway, chat output, research scratch) → distill any insight to the right file first. Then ask: will I re-read this source itself? If yes, move to `03 Sources/{subfolder}/`. If no, archive with `processed_into:`. Source preservation is the exception, not the default.
+3. **Journal entry** (reflection, processing, thinking out loud) → synthesize if ready; leave if it needs to settle. Archive only after synthesis with `processed_into:`.
+4. **Noise** (no extractable signal) → archive directly. No `processed_into:` field — its absence flags the note as either noise or under-processed.
 
 **Processing clippings** (`00 Inbox/Clippings/`) — clippings are pre-structured external content, not personal captures. Process each one by:
 1. Reading the article and identifying the key insight or pattern.
@@ -173,6 +178,16 @@ When helping with file updates:
 - If something is provisional, label it clearly as provisional.
 - Prefer appending or lightly revising over large rewrites.
 
+## Goldilocks distillation
+
+Distillation is the primary work. Preservation is the exception.
+
+- The Wiki or World Model file is the first-class output. The source is secondary.
+- Default target for a `02 Wiki/Concepts/` note is ~30–50 lines. If a concept genuinely needs more, ask whether two notes would serve better than one bloated one.
+- Extract the *delta* — the principles or actions that change behavior. Skip background, generic best practices, and structural mirroring of the original.
+- Preserve a source in `03 Sources/` only if you can name a specific re-retrieval reason (e.g., "I'll re-read the methodology while practicing it"). If a 30-line distillation captures the value, archive the source.
+- Test for "distilled enough": could a future agent act on this without re-reading the source? If yes, you're done. If it sounds generic, cut harder.
+
 ## Log trail principle
 
 Maintain a log trail only when the history of how something changed is as important as the current state.
@@ -197,6 +212,7 @@ The test: ask "would knowing when or why this changed affect how I use it?" If y
 - Update `01 World Model/02 Rules/Decision Rules.md` when a rule is added, revised, invalidated, or promoted from provisional to durable.
 - Update `01 World Model/04 Reviews/` when recording a specific decision, weekly review, experiment, surprise, or outcome.
 - Move processed inbox notes to `90 Archive/YYYY-MM/` after synthesis.
+- When archiving a processed note, add a `processed_into:` frontmatter field listing the destination file(s). Missing field on an archived note signals it was either noise or under-processed and should be re-examined.
 - Add new permanent knowledge to `02 Wiki/` only after it has been processed and distilled — not as raw capture.
 - Avoid putting long-term rules only in chat. Put them in the correct file.
 
@@ -219,6 +235,8 @@ If I ask you to proceed, then apply the update directly.
 - Distinguish what is known, what is inferred, and what is uncertain.
 - If reasoning against action sounds too clean, check whether fear or avoidance may be disguising itself as prudence.
 - When recommending a direction, include the strongest case against it.
+- Before recommending a system change, first check whether the system already handles it. Recommend "no change" when the model is working — saying yes to needless change is a form of sycophancy.
+- Sycophancy test: would I make this same recommendation if Mitchell seemed indifferent rather than committed? If the recommendation depends on his enthusiasm, it isn't grounded.
 
 ## Current objective
 

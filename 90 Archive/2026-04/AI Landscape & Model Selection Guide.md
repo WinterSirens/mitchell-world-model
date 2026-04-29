@@ -1,8 +1,11 @@
 ---
 category: AI Strategy
-tags: [AI, LLM, Benchmarking, Productivity, Automation]
+tags: [AI, LLM, Benchmarking, Productivity, Automation, archived]
 source: https://artificialanalysis.ai/
 created: 2026-04-28
+archived: 2026-04-29
+processed_into:
+  - 02 Wiki/Concepts/LLM Best Use Cases.md
 ---
 **Trigger:** I'm always trying to find the best model out there to use for Warp. I want to update [[LLM Best Use Cases]] in warp page weekly using https://artificialanalysis.ai/ and a live list of the most recent Warp.dev models to compare to the https://artificialanalysis.ai/ page, which then updates the [[LLM Best Use Cases]]. 
 > [!summary] Executive Summary
