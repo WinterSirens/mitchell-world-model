@@ -12,7 +12,7 @@ The raw dump zone. No structure required. Write anything here — fleeting thoug
 
 **Source material** — article clippings, meeting notes, podcast takeaways, chat outputs, research scratch, or anything upstream that may contain reusable signal.
 
-No tagging required. Write freely, especially on mobile. The weekly synthesis session handles the distinction interactively.
+Tags are optional but helpful. Add them when you know the type: `#capture`, `#journal`, `#source`, `#feedback`, `#idea`, `#clipping`. The weekly synthesis uses these as routing signals. No tag is also fine — the agent will infer from content.
 
 ## What belongs here
 - A thought you had in the shower that felt important
@@ -38,5 +38,7 @@ No tagging required. Write freely, especially on mobile. The weekly synthesis se
 8. The World Model gets smarter without bloating.
 
 ## Format
-No format required. No tags required. Title files by date or topic — whatever you'll actually do on your phone.
+No format required. Title files by date or topic — whatever you'll actually do on your phone.
 `YYYY-MM-DD Topic.md` works well if you want order, but anything is fine.
+
+Tags are optional but make routing faster: `#capture`, `#journal`, `#source`, `#feedback`, `#idea`, `#clipping`
