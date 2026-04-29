@@ -29,8 +29,7 @@ A structured Obsidian vault that serves as a personal operating system: tracking
 
 ```
 .claude/skills/          # Custom AI agent skills for this vault
-00 Inbox/                # Raw dump zone — unprocessed captures and clippings
-  Clippings/             # Web articles saved via Obsidian web clipper
+00 Inbox/                # Flat dump zone — no subfolders, no pre-sorting
 00 System/               # Vault infrastructure (templates, readmes)
   Templates/
   Readmes/
@@ -56,7 +55,10 @@ A structured Obsidian vault that serves as a personal operating system: tracking
   Decision Memos/
   Active Plans/
 90 Archive/              # Processed originals after distillation, organized by YYYY-MM/
+  YYYY-MM/
 Personal World Model/    # Required by Cowork plugin — do not rename or move
+AGENTS.md
+CLAUDE.md
 ```
 
 ## Key workflows
