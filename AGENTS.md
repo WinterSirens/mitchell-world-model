@@ -102,12 +102,12 @@ When these layers conflict, trust the files first, then flag the conflict.
 - `Themes/` — cross-cutting themes and patterns that recur across domains.
 - `Syntheses/` — longer synthesized artifacts that combine multiple sources or concepts into a cohesive view.
 
-**`03 Sources/`** — upstream inputs and raw research. This is where external material lives before or after it's been extracted from. Do not put synthesis or personal conclusions here — those belong in `02 Wiki/` or `01 World Model/`.
-- `Articles/` — processed web articles and clippings after synthesis (moved from `00 Inbox/Clippings/`).
-- `Podcasts/` — notes from podcast episodes.
-- `Meetings/` — notes from meetings, calls, and conversations.
-- `Chats/` — notable AI conversation outputs worth preserving.
-- `Research Notes/` — deeper research artifacts that back specific decisions (e.g., market analysis, competitive teardowns).
+**`03 Sources/`** — preserved upstream material whose original form is likely to be useful again. This is not a second archive — the default is distill then archive. Preserve a source here only when you can name a specific re-retrieval reason. Do not put synthesis or personal conclusions here — those belong in `02 Wiki/` or `01 World Model/`.
+- `Articles/` — preserved web articles and clippings worth re-reading after synthesis.
+- `Podcasts/` — podcast notes or transcripts worth reusing.
+- `Meetings/` — meeting notes worth preserving as source material.
+- `Chats/` — notable AI conversation outputs worth revisiting.
+- `Research Notes/` — deeper research artifacts backing specific decisions (e.g., market analysis, competitive teardowns).
 
 **`04 Decisions/`** — active and recent decision artifacts. Separate from Reviews (which are retrospective) — this layer holds forward-looking decision support.
 - `Weekly Briefs/` — weekly decision briefs and priority snapshots.
