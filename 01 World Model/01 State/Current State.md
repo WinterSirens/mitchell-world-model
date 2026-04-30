@@ -24,8 +24,8 @@ It should reflect the present moment, not long-term identity claims.
 - Seed launch cannot happen until email list hits 300-400 subscribers.
 - Wedge workflow is a candidate (LinkedIn content creation), not locked — Marily's audience may need a different demo. Workshop artifacts are built with the demo task left as TBD. Next blocker is Marily's feedback on which candidate resonates.
 - **6 workshop templates need to be built before launch** (Workflow Candidate Scorecard, Workflow Brief, Context Pack, Failure Map + Test Set, 7-Day SHIFT Plan, plus the pre-filled demo reference). These are simple 1-page Google Docs — 2–3 hours of work once the demo task is chosen.
-- Commitments at 8, with MX Prototype on backburner — effectively 7 active tracks.
-- MX Prototype Composer is on slower burn while waiting for Crystal's CRO meeting facilitation.
+- Commitments at 7 — MX Prototype Composer CRO meeting path dropped as of 2026-04-30; still waiting on Crystal for next steps on the prototype itself.
+- **On sabbatical until May 26, 2026** (day after Memorial Day). No MX action possible for ~3 weeks.
 - Music sync licensing starting May — treated as energy management, not a competing project.
 ## Current bottleneck
 As of 2026-04-28: the workshop pitch artifacts are built — finalized agenda with facilitation notes, publication-ready Maven landing page copy, and executive summary (with full landing page copy appended) are in `04 Decisions/Active Plans/`. The demo task is left as TBD with 5 candidates listed; LinkedIn content creation is the leading candidate but not locked.
@@ -37,7 +37,8 @@ See `02 Brain/Research/founder_memo_research_results.md` for the original lead-m
 - **PLF — AI SHIFT Method**: Smallest viable lead magnet (one video + one asset + one page + one email). Wedge workflow decision is shared with the workshop. Build once, deploy in two places.
 - **AI PM Bootcamp — Capstone Facilitator (NEW)**: $3,000/cohort contract from Marily. Contract being sent later this week. Recurring commitment — monitor capacity impact.
 - **LinkedIn Content Strategy**: 3-4 posts/week. Emphasis on pain/reframe/mini-win posts. Hard CTA only every 4th post. Drive to lead magnet page once it ships.
-- **MX Prototype Composer** (backburner): On hold until Crystal returns from India. Potential pivot from the original Prototype Composer direction toward an AI MX plugin for self-service client implementation speed. Revisit when Crystal is available.
+- **MX AI + Automations Delivery Lead** (prepped): Talking points and manager one-pager drafted. Have the conversation first week back from sabbatical (week of May 26). See `04 Decisions/Active Plans/MX Return Plan — Delivery Lead + MX IDE.md`.
+- **MX IDE** (independent PM project): Evolved from Prototype Composer — an IDE for FI/Fintech clients to speed up their build-and-connect implementation process. This is Mitchell's independent AI PM pursuit, separate from the delivery lead role. Still waiting on Crystal for the prototype direction. On hold during sabbatical.
 - **Music — Sync Licensing**: Creative hobby starting May. 2-hour blocks. Treated as energy management, not a business priority.
 - **Personal World Model**: This system — improving decision quality over time.
 ## Active risks
@@ -45,9 +46,9 @@ See `02 Brain/Research/founder_memo_research_results.md` for the original lead-m
 - Workshop pitch becoming a perfectionist artifact rather than a v1 sent to Marily quickly.
 - **Validation pull on the Marily relationship.** Therapy named the want-to-be-validated pattern. The pivot is strategically defensible, but watch for any version of this where Marily's enthusiasm replaces real audience feedback.
 - Founder-led detour: if the workshop pitch stalls, lead magnet path will have lost time and produced no public signal.
-- MX Prototype direction drift: the potential pivot (AI plugin for self-service implementations) could become a separate project if it's real — but don't scope it until Crystal is back and the conversation resumes.
+- MX IDE scope creep: the vision is clear (speed up client implementations) but don't over-scope before doing discovery. Keep it a PM project, not a build project, until the problem is validated with clients/SAs.
+- Delivery lead conversation going sideways: if the comp band comes back under $115K, Mitchell needs to decide whether the title alone is worth it for the resume. See talking points for pushback handling.
 - Posting LinkedIn content that doesn't convert to subscribers (awareness without capture).
-- MX Prototype Composer momentum stalling while waiting for Crystal's follow-up.
 ## Signals of a good week
 - Chose the wedge workflow with Marily's input (LinkedIn content creation is the leading candidate — need Marily's signal on audience fit).
 - ~~Drafted v1 of the workshop pitch artifact.~~ ✓ Done — agenda + landing page built.
@@ -67,4 +68,5 @@ See `02 Brain/Research/founder_memo_research_results.md` for the original lead-m
 - What format does the workshop take in v1 — live Maven session, cohort guest, or co-marketed mini-course?
 - Email subscriber count: 0 (list not yet configured).
 - What is the MX average sales cycle length and where do deals most commonly stall?
-- When Crystal follows up, what specific ask should Mitchell make for the CRO meeting?
+- When Crystal follows up, how does her input shape the MX IDE direction?
+- What does the comp band look like for the delivery lead role? (Ask manager first week back.)
