@@ -17,6 +17,12 @@ _Carry forward from Current State.md — logged here for historical record._
 - **Commitments:** [#]
 - **Main goal this week:**
 
+## Energy shift
+_What changed from last week? How does this week's energy compare?_
+- Energy trend: [↑ up / → stable / ↓ down]
+- Main energy drain:
+- What this energy level explains (from Movement/Stalled sections):
+
 ## Priorities
 _Top 3 active priorities this week, in order._
 1. 
