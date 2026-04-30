@@ -119,6 +119,14 @@ When asking for help or making asks:
 - "Let's [action]" (collaborative framing)
 - "Hope it helps" (closing)
 
+### High-Stakes Decisions & Follow-Ups
+
+When a communication involves a high-stakes decision, major opportunity, or critical blocker, naturally build clear "I'm-going-to-follow-up" intent into the closing of the message. This sets an expected timeline and creates a natural, pre-approved reason to reach back out.
+
+- "If I don't hear from you by [Day], I'll circle back."
+- "I'll plan to check back in on [Date] to see where we landed."
+- "Let me know what you think—I'll follow up on [Day] either way."
+
 ## Self-Correction and Restarts
 
 Mitchell's natural voice includes self-correction. These are authentic and should not be sanded down:
