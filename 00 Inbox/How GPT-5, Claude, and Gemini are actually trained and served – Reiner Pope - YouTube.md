@@ -1,0 +1,1 @@
+[How GPT-5, Claude, and Gemini are actually trained and served – Reiner Pope - YouTube](https://www.youtube.com/watch?v=xmkSf5IS-zw)
