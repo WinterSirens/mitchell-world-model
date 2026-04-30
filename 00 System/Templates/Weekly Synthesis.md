@@ -57,6 +57,26 @@ Answer these to update Current State.md:
 - Claude proposes any `AGENTS.md` updates if the system itself needs to change
 - Note what got smarter this week
 
+### 6. Weekly Brief (mandatory)
+Every synthesis session ends with a Weekly Brief. This is the longitudinal travel log — the record the AI reads across sessions to detect patterns, flag drift, and make better predictions over time.
+
+Claude creates a new file at `04 Decisions/Weekly Briefs/YYYY-MM-DD Weekly Brief.md` using the template at `00 System/Templates/Weekly Brief.md`.
+
+Most fields can be filled from answers already given during this session:
+- State snapshot → from Step 2 (State check) and Current State.md
+- Priorities → from Step 2
+- Bottleneck → from Step 2
+- Decisions → from Step 1 (Inbox triage) and Step 3 (Rules audit)
+- Open questions → from Step 4
+
+Ask Mitchell these additional questions to complete the brief:
+1. **What actually moved this week?** (1-3 things that advanced)
+2. **What stalled?** (was on the list, didn't happen)
+3. **What are you avoiding right now?** (the honest answer, not the diplomatic one)
+4. **What surprised you this week?** (good or bad)
+
+Then write the file. Do not ask for approval on individual fields — draft the whole brief and present it for a single pass of edits before saving.
+
 ---
 
 ## Signals the synthesis is working

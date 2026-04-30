@@ -107,7 +107,7 @@ When these layers conflict, trust the files first, then flag the conflict.
 - `Research Notes/` — deeper research artifacts backing specific decisions (e.g., market analysis, competitive teardowns).
 
 **`04 Decisions/`** — active and recent decision artifacts. Separate from Reviews (which are retrospective) — this layer holds forward-looking decision support.
-- `Weekly Briefs/` — weekly decision briefs and priority snapshots.
+- `Weekly Briefs/` — longitudinal travel log. One file per week, created at the close of every weekly synthesis. Each brief captures a consistent snapshot: state, priorities, bottleneck, what moved, what stalled, decisions made, and what Mitchell is avoiding. Over time this log enables pattern detection — recurring bottlenecks, decision tendencies, energy cycles, drift signals — and gives the AI historical context to make better predictions across sessions.
 - `Decision Memos/` — structured decision write-ups for significant choices.
 - `Active Plans/` — current execution plans worth tracking (not long-term archive).
 
@@ -150,12 +150,13 @@ The synthesis is the mechanism that makes the system compound. Without it, the i
 When helping with a decision:
 
 1. Read the relevant files — usually `01 World Model/01 State/Current State.md`, `01 World Model/02 Rules/Decision Rules.md`, and any relevant note in `01 World Model/03 Contexts/` or `01 World Model/04 Reviews/`.
-2. Summarize the current state briefly.
-3. Identify the rules that apply.
-4. Simulate the main options, usually YES / NO / WAIT.
-5. Recommend one action.
-6. Give the strongest counterargument.
-7. If durable learning occurred, propose the correct file update.
+2. Read the last 4–8 files in `04 Decisions/Weekly Briefs/` (sorted by date, most recent first). Scan for: recurring bottlenecks, patterns in what stalled vs. moved, decision tendencies, energy cycles, and anything Mitchell flagged as avoiding. Surface any pattern that is relevant to the current decision.
+3. Summarize the current state briefly, including any pattern from the briefs worth flagging.
+4. Identify the rules that apply.
+5. Simulate the main options, usually YES / NO / WAIT.
+6. Recommend one action.
+7. Give the strongest counterargument.
+8. If durable learning occurred, propose the correct file update.
 
 When helping with file updates:
 
