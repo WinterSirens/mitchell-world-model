@@ -283,14 +283,28 @@ def resolve_draft(file_arg: str) -> Path:
     sys.exit(f"File not found: {file_arg}")
 
 
-def resolve_image(fm: dict) -> Path | None:
+def resolve_image(fm: dict, draft_path: Path | None = None) -> Path | None:
     img = fm.get("image", "").strip()
-    if not img:
+    if img:
+        p = ASSETS_DIR / img
+        if not p.exists():
+            sys.exit(f"Image not found: {p}\nDrop the file into 05 Content/LinkedIn/assets/")
+        return p
+    if not draft_path:
         return None
-    p = ASSETS_DIR / img
-    if not p.exists():
-        sys.exit(f"Image not found: {p}\nDrop the file into 05 Content/LinkedIn/assets/")
-    return p
+    image_exts = {".jpg", ".jpeg", ".png", ".gif"}
+    candidates = [p for p in ASSETS_DIR.iterdir() if p.suffix.lower() in image_exts]
+    # Exact stem match first
+    for p in candidates:
+        if p.stem.lower() == draft_path.stem.lower():
+            return p
+    # Keyword match: any word in image stem appears in draft stem
+    draft_words = set(draft_path.stem.lower().split("-"))
+    for p in candidates:
+        image_words = set(re.split(r"[-_ ]+", p.stem.lower()))
+        if image_words & draft_words:
+            return p
+    return None
 
 
 # ---------------------------------------------------------------------------
@@ -306,7 +320,7 @@ def publish_one(file_path: Path, hook_letter: str | None, dry_run: bool, env: di
         print(f"SKIP {file_path.name}: {len(text)} chars exceeds 3000 limit.")
         return
 
-    image_path = resolve_image(fm)
+    image_path = resolve_image(fm, file_path)
     image_label = f"  Image:    {image_path.name}" if image_path else ""
 
     print("=" * 60)
@@ -360,7 +374,7 @@ def schedule_one(file_path: Path, slot: dt.datetime, hook_letter: str | None,
         print(f"SKIP {file_path.name}: {len(text)} chars exceeds 3000 limit.")
         return
 
-    image_path = resolve_image(fm)
+    image_path = resolve_image(fm, file_path)
     slot_str = slot.strftime("%Y-%m-%d %a %I:%M %p MT")
 
     print("=" * 60)
