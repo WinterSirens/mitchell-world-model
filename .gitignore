@@ -6,3 +6,9 @@
 # Obsidian workspace state (open tabs, cursor position, etc.)
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
+
+# Secrets — LinkedIn API credentials live here
+00 System/scripts/linkedin/.env
+00 System/scripts/linkedin/.tokens.json
+__pycache__/
+*.pyc

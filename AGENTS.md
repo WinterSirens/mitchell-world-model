@@ -71,6 +71,11 @@ When these layers conflict, trust the files first, then flag the conflict.
   Weekly Briefs/
   Decision Memos/
   Active Plans/
+05 Content/
+  LinkedIn/
+    drafts/
+    published/
+    performance/
 90 Archive/
   YYYY-MM/
 |Personal World Model/
@@ -111,6 +116,8 @@ When these layers conflict, trust the files first, then flag the conflict.
 - `Decision Memos/` — structured decision write-ups for significant choices.
 - `Active Plans/` — current execution plans worth tracking (not long-term archive).
 
+**`05 Content/`** — working queue and historical record for content Mitchell produces (currently LinkedIn). Replaces the old Notion Content Tracker. The `linkedin-creator` skill writes drafts directly into `05 Content/LinkedIn/drafts/`. Mitchell reviews, edits, and manually schedules to LinkedIn. Files move to `published/` after posting. Monthly performance logs live in `performance/YYYY-MM.md` and feed skill-improvement reviews. See `05 Content/LinkedIn/README.md` for the full convention.
+
 **`90 Archive/`** — processed graveyard. Inbox notes land here after weekly synthesis, organized by `YYYY-MM/` subfolder. Never edit archived notes — they are a record of what was true at that time.
 
 **`Personal World Model/`** — required by Cowork (Obsidian plugin) for project context. Do not move or rename this folder.
@@ -123,6 +130,7 @@ When classifying or moving a note, use this routing logic. Prefer explicit reaso
 - If it's **durable synthesized knowledge** (frameworks, concepts, evergreen reference) → `02 Wiki/`
 - If it's **raw upstream material** (source articles, research, meeting notes, chats) → `03 Sources/`
 - If it **changes what Mitchell should do next** (decision memos, plans, weekly briefs) → `04 Decisions/`
+- If it's **a content draft for LinkedIn** (or other channels Mitchell publishes to) → `05 Content/`
 - If it's **unprocessed** → `00 Inbox/` until the weekly synthesis handles it
 - If **unsure**: do not guess. Flag the ambiguity and ask, or park it in `00 Inbox/` with a note.
 

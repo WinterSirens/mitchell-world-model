@@ -548,23 +548,35 @@ When the user provides a topic, first identify which content pillar it maps to. 
 **Pre-Publish Quality Gates:** [Confirm Hook Test ✓, Validation Check ✓, Engagement Question ✓, Emoji Count ✓ all pass. If any fail, rewrite before delivering.]
 ```
 
-### Save to Notion
+### Save to Vault
 
-After drafting, save as a row in the **Content Tracker** database using the Notion MCP `create-pages` tool. This ensures the post appears as a proper database entry (not a random child page underneath it).
+After drafting, save the post as a markdown file in `05 Content/LinkedIn/drafts/`. This is the working queue — Mitchell reviews from here, edits, and manually schedules in LinkedIn.
 
-- **Parent type:** `data_source_id`
-- **Data source ID:** `0b4b3bb7-29df-4c07-b127-bf5b432f8226`
-- **Icon:** 💼
-- **Properties to set:**
-  - `Title`: Descriptive title for the post
-  - `Content Type`: `LinkedIn Article`
-  - `Status`: `Draft`
-  - `Tags`: Select the most relevant tags from: AI Tools, SHIFT Method, Prompting, Context Engineering, Productivity, Mindset, Newsletter Growth, AI Models (pick based on post topic)
-- **Page content:** Place the full post draft (hook options, body, post notes) as the page body using Notion Markdown
+**Filename pattern:** `YYYY-MM-DD-pillar{N}-{kebab-case-slug}.md`
 
-**Important:** Use `data_source_id` as the parent type, not `page_id` or `database_id`. Using `page_id` would create a child page below the database instead of a row inside it.
+Examples:
+- `2026-05-04-pillar3-cut-recap-emails.md`
+- `2026-05-06-pillar2-prompts-arent-the-problem.md`
 
-After saving, confirm with a link and ask: **"Want me to refine anything, or do you have another one?"**
+The date is today's date (drafted date), not the planned post date. The slug is 3-6 words pulled from the post's core idea, kebab-cased.
+
+**Frontmatter:**
+
+```yaml
+---
+type: linkedin-post
+content_type: short-form
+pillar: {1-6}
+status: draft
+created: YYYY-MM-DD
+published: null
+linkedin_url: null
+---
+```
+
+**Body:** Place the full Hook Options, Post Body, and Post Notes sections (as defined in the Output Format above) directly into the file body.
+
+After saving, confirm with the file path and ask: **"Want me to refine anything, or do you have another one?"**
 
 ---
 
@@ -600,27 +612,35 @@ Use when the user explicitly asks for a LinkedIn article, or when the idea needs
 **Pre-Publish Quality Gates:** [Confirm Hook Test ✓ and Validation Check ✓ pass. Engagement Question and Emoji Count are short-form gates and don't strictly apply to articles, but the article's closing CTA should still be specific, not generic.]
 ```
 
-### Save to Notion
+### Save to Vault
 
-Same process as Short-Form Posts. Save as a row in the **Content Tracker** database:
+Same flow as Short-Form Posts — save as a markdown file in `05 Content/LinkedIn/drafts/`.
 
-- **Parent type:** `data_source_id`
-- **Data source ID:** `0b4b3bb7-29df-4c07-b127-bf5b432f8226`
-- **Icon:** 💼
-- **Properties to set:**
-  - `Title`: Descriptive title for the article
-  - `Content Type`: `LinkedIn Article`
-  - `Status`: `Draft`
-  - `Tags`: Select the most relevant tags based on the article topic
-- **Page content:** Full article draft (headline options, body, article notes) as the page body
+**Filename pattern:** `YYYY-MM-DD-article-{kebab-case-slug}.md`
 
-**Important:** Use `data_source_id` as the parent type, not `page_id` or `database_id`.
+Example: `2026-05-08-article-name-the-pain.md`
 
-After saving, confirm with a link and ask: **"Want me to refine anything, or do you have another one?"**
+**Frontmatter:**
+
+```yaml
+---
+type: linkedin-post
+content_type: long-form-article
+status: draft
+created: YYYY-MM-DD
+published: null
+linkedin_url: null
+---
+```
+
+(Articles omit the `pillar` field since pillars apply to short-form posts.)
+
+**Body:** Place the full Headline Options, Article Body, and Article Notes sections into the file body.
+
+After saving, confirm with the file path and ask: **"Want me to refine anything, or do you have another one?"**
 
 ---
 
 ## Tool Integration
 
-- **Notion** (default: connected): Save drafts to the Content Tracker database using the `data_source_id` format described above
-- **No platform**: Deliver copy-paste-ready content the user can drop directly into LinkedIn's editor
+Drafts save to `05 Content/LinkedIn/drafts/` in the Mitchell World Model vault. Mitchell reviews from there and posts manually to LinkedIn. After publishing, he updates frontmatter (`status`, `published`, `linkedin_url`) and moves the file to `05 Content/LinkedIn/published/`. Performance is logged monthly in `05 Content/LinkedIn/performance/YYYY-MM.md` and feeds skill improvement reviews. See `05 Content/LinkedIn/README.md` for the full convention.
