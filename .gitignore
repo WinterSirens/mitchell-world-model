@@ -13,5 +13,5 @@
 __pycache__/
 *.pyc
 
-# Folders to ignore
-05 Content/LinkedIn
+# LinkedIn image assets (can be large; not needed in git)
+05 Content/LinkedIn/assets/
