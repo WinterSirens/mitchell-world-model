@@ -12,3 +12,6 @@
 00 System/scripts/linkedin/.tokens.json
 __pycache__/
 *.pyc
+
+# Folders to ignore
+05 Content/LinkedIn

@@ -5,7 +5,7 @@ description: "Create LinkedIn posts and articles, from short-form posts (under 3
 
 # LinkedIn Content Creator
 
-Create LinkedIn posts and long-form articles designed to convert readers into newsletter subscribers. Every post targets The Stuck Implementer and runs through the content pillar system below. Save everything to the Content Tracker database in Notion automatically.
+Create LinkedIn posts and long-form articles designed to convert readers into newsletter subscribers. Every post targets The Stuck Implementer and runs through the content pillar system below. Save drafts to the vault — never publish or trigger publishing directly.
 
 ---
 
@@ -643,4 +643,6 @@ After saving, confirm with the file path and ask: **"Want me to refine anything,
 
 ## Tool Integration
 
-Drafts save to `05 Content/LinkedIn/drafts/` in the Mitchell World Model vault. Mitchell reviews from there and posts manually to LinkedIn. After publishing, he updates frontmatter (`status`, `published`, `linkedin_url`) and moves the file to `05 Content/LinkedIn/published/`. Performance is logged monthly in `05 Content/LinkedIn/performance/YYYY-MM.md` and feeds skill improvement reviews. See `05 Content/LinkedIn/README.md` for the full convention.
+This skill drafts and saves only. It never publishes, never calls `post.py`, and never triggers any LinkedIn API action.
+
+Drafts save to `05 Content/LinkedIn/drafts/` in the Mitchell World Model vault. Mitchell reviews and edits from there, then manually runs `post.py` when he's ready to publish. After publishing, he updates frontmatter (`status`, `published`, `linkedin_url`) and moves the file to `05 Content/LinkedIn/published/`. Performance is logged monthly in `05 Content/LinkedIn/performance/YYYY-MM.md` and feeds skill improvement reviews. See `05 Content/LinkedIn/README.md` for the full convention.
