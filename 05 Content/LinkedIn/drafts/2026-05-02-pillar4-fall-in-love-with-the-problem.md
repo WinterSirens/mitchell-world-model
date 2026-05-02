@@ -18,7 +18,7 @@ linkedin_url: null
 
 You can build anything as an AI product manager. That's exactly why so many AI products fail.
 
-I just wrapped Maralee Nika's AI PM bootcamp, and watching 15 working prototypes on graduation day made one thing obvious.
+I just wrapped Marily Nika's AI PM bootcamp, and watching 15 working prototypes on graduation day made one thing obvious.
 
 The teams who struggled stayed married to their solution. Every pivot felt like a loss. Every piece of feedback that didn't land felt like a setback.
 
