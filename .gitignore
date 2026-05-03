@@ -22,3 +22,15 @@ __pycache__/
 # Content folder — all drafts, published posts, and performance logs
 # stay local in Obsidian; only system/functionality belongs in git
 05 Content/
+
+# Personal world model data — state, rules, contexts, reviews
+01 World Model/
+
+# Distilled personal knowledge base
+02 Wiki/
+
+# Source materials — meeting notes, reference docs, articles
+03 Sources/
+
+# Decision memos, active plans, weekly briefs
+04 Decisions/
