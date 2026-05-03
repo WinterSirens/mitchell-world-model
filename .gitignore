@@ -19,5 +19,6 @@
 __pycache__/
 *.pyc
 
-# LinkedIn image assets (can be large; not needed in git)
-05 Content/LinkedIn/assets/
+# Content folder — all drafts, published posts, and performance logs
+# stay local in Obsidian; only system/functionality belongs in git
+05 Content/
