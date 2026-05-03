@@ -201,7 +201,7 @@ During a Weekly Synthesis session, process all inbox items in parallel by spawni
 
 **Shared destination conflict rule:** when two or more sub-agents propose changes to the same destination file (e.g., `Decision Rules.md`), the orchestrator merges those changes before writing — never overwrites one with another.
 
-**When to skip parallelization:** if the inbox contains only 1–2 files, sequential processing is fine. Spin up parallel agents only when there are 3 or more files to process.
+**When to skip parallelization:** if the inbox contains 5 or fewer files, sequential processing is fine. Spin up parallel agents only when there are 6 or more files to process.
 
 ## Core workflow
 
