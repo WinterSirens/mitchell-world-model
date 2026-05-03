@@ -1,1 +1,0 @@
-[Michelle Khare practiced poverty before quitting her job](https://www.perplexity.ai/page/michelle-khare-practiced-pover-Ad7OCLGhRa.Fi_gIr33xAA)

@@ -1,3 +1,6 @@
+# Inbox — transient dump zone, processed weekly, no value in tracking
+00 Inbox/
+
 # macOS
 .DS_Store
 .AppleDouble
