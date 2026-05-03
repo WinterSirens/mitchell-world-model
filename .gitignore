@@ -1,8 +1,5 @@
-# Inbox — transient dump zone, processed weekly, no value in tracking
-00 Inbox/
-
-# Archive - post Inbox processing
-90 Archive/ 
+# Claude Code worktrees (ephemeral, never push)
+.claude/worktrees/
 
 # macOS
 .DS_Store
@@ -19,5 +16,63 @@
 __pycache__/
 *.pyc
 
-# LinkedIn image assets (can be large; not needed in git)
-05 Content/LinkedIn/assets/
+# Vault content (local in Obsidian, not pushed to GitHub)
+# Inside content folders, ignore everything except README.md, AGENTS.md, CLAUDE.md, and .gitkeep.
+# Pattern: blanket-ignore contents, then re-include directories and special files.
+# NOTE: a blanket "00 Inbox/" rule would block all negations inside it, so we use "00 Inbox/**" instead.
+
+00 Inbox/**
+!00 Inbox/
+!00 Inbox/**/
+!00 Inbox/**/README.md
+!00 Inbox/**/AGENTS.md
+!00 Inbox/**/CLAUDE.md
+!00 Inbox/**/.gitkeep
+
+01 World Model/**
+!01 World Model/
+!01 World Model/**/
+!01 World Model/**/README.md
+!01 World Model/**/AGENTS.md
+!01 World Model/**/CLAUDE.md
+!01 World Model/**/.gitkeep
+
+02 Wiki/**
+!02 Wiki/
+!02 Wiki/**/
+!02 Wiki/**/README.md
+!02 Wiki/**/AGENTS.md
+!02 Wiki/**/CLAUDE.md
+!02 Wiki/**/.gitkeep
+
+03 Sources/**
+!03 Sources/
+!03 Sources/**/
+!03 Sources/**/README.md
+!03 Sources/**/AGENTS.md
+!03 Sources/**/CLAUDE.md
+!03 Sources/**/.gitkeep
+
+04 Decisions/**
+!04 Decisions/
+!04 Decisions/**/
+!04 Decisions/**/README.md
+!04 Decisions/**/AGENTS.md
+!04 Decisions/**/CLAUDE.md
+!04 Decisions/**/.gitkeep
+
+05 Content/**
+!05 Content/
+!05 Content/**/
+!05 Content/**/README.md
+!05 Content/**/AGENTS.md
+!05 Content/**/CLAUDE.md
+!05 Content/**/.gitkeep
+
+90 Archive/**
+!90 Archive/
+!90 Archive/**/
+!90 Archive/**/README.md
+!90 Archive/**/AGENTS.md
+!90 Archive/**/CLAUDE.md
+!90 Archive/**/.gitkeep
