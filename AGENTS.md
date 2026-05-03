@@ -167,6 +167,42 @@ Do not treat clippings or feedback as raw thought — they are input material to
 
 The synthesis is the mechanism that makes the system compound. Without it, the inbox fills and the World Model goes stale.
 
+## Parallel inbox processing (multi-agent)
+
+During a Weekly Synthesis session, process all inbox items in parallel by spawning one sub-agent per file rather than handling them sequentially.
+
+**Orchestrator responsibilities:**
+
+1. List every file directly in `00 Inbox/` (flat, no subfolders).
+2. Spawn one sub-agent per file simultaneously, passing each sub-agent:
+   - The full file path and its raw content.
+   - The complete 4-way decision tree from the section above.
+   - The routing rules and Goldilocks distillation guidelines from this file.
+   - Instruction to return a structured result object (see format below).
+3. Collect all sub-agent results once they finish.
+4. Present a consolidated triage summary to Mitchell — one row per file — for a single approval pass.
+5. After approval, apply all writes, moves, and archival operations (these must run sequentially per file to avoid conflicts on shared destination files like `Decision Rules.md` or `Current State.md`).
+
+**Sub-agent instruction template** (issue this to each spawned agent):
+
+> You are processing a single inbox note during a Weekly Synthesis. Your job is to classify the note and propose a distilled output — do not write any files. Return a structured result only.
+>
+> File path: `<path>`
+> File content: `<content>`
+>
+> Apply the 4-way decision tree (capture / source material / journal entry / noise). Then return:
+> - `type`: one of `capture`, `source_material`, `journal_entry`, `noise`
+> - `ready`: `true` or `false` (for journal entries: is it ready to synthesize now?)
+> - `destination`: the target file(s) or folder(s) where distilled content belongs
+> - `distillation`: the proposed text to add or update in the destination file(s) — write it out in full, ready to paste
+> - `preserve_source`: `true` or `false`, with a named re-retrieval reason if true
+> - `processed_into`: the value to write into the `processed_into:` frontmatter field when archiving
+> - `archive_path`: the target path under `90 Archive/YYYY-MM/` for the original note
+
+**Shared destination conflict rule:** when two or more sub-agents propose changes to the same destination file (e.g., `Decision Rules.md`), the orchestrator merges those changes before writing — never overwrites one with another.
+
+**When to skip parallelization:** if the inbox contains only 1–2 files, sequential processing is fine. Spin up parallel agents only when there are 3 or more files to process.
+
 ## Core workflow
 
 When helping with a decision:
