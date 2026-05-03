@@ -1,0 +1,1 @@
+[Reacting to "Why AI is so smart but also so dumb?" - YouTube](https://www.youtube.com/watch?v=pngC-TH8M0U)
