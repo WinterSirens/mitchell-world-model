@@ -3,12 +3,21 @@
 Publish or schedule LinkedIn posts from vault drafts.
 
 Usage:
-    lipost <name>                       # publish one draft immediately (partial name ok)
-    lipost --all                        # publish all drafts immediately
-    lipost --all --schedule             # schedule all drafts Mon/Tue/Thu/Fri at 8 AM MT
-    lipost --all --schedule --start 2026-05-12  # start from a specific Monday
-    lipost <name> --dry-run             # preview without posting
-    lipost <name> --hook A              # prepend Hook A from the draft
+    post.py <name>                                 # publish one draft immediately (partial name ok)
+    post.py --all                                  # publish all drafts immediately
+    post.py --all --schedule                       # schedule all drafts via launchd (Mon/Tue/Thu/Fri 8 AM MT)
+    post.py --all --schedule --start 2026-05-12    # start cadence from a specific date
+    post.py <name> --schedule [--start DATE]       # schedule one draft via launchd
+    post.py <name> --unschedule                    # remove launchd job, revert draft to status: draft
+    post.py --all --unschedule                     # unschedule all scheduled drafts
+    post.py <name> --dry-run                       # preview without posting or writing plists
+    post.py <name> --hook A                        # prepend Hook A from the draft
+
+Scheduling writes a launchd plist to ~/Library/LaunchAgents/ and registers it
+via `launchctl bootstrap`. When the job fires, it calls this script with the
+draft path to publish immediately. LinkedIn's REST API does not support
+member-account post scheduling (lifecycleState "SCHEDULED" is rejected with 422);
+launchd is the local workaround.
 
 Scheduling spaces drafts Mon/Tue/Thu/Fri at 8:00 AM Mountain Time, ordered by
 `priority` frontmatter (lowest number first), then by filename.
@@ -21,7 +30,9 @@ from __future__ import annotations
 
 import datetime as dt
 import json
+import os
 import re
+import subprocess
 import sys
 import time
 import urllib.error
@@ -36,6 +47,10 @@ ENV_PATH = SCRIPT_DIR / ".env"
 DRAFTS_DIR = VAULT_ROOT / "05 Content" / "LinkedIn" / "drafts"
 PUBLISHED_DIR = VAULT_ROOT / "05 Content" / "LinkedIn" / "published"
 ASSETS_DIR = VAULT_ROOT / "05 Content" / "LinkedIn" / "assets"
+LOGS_DIR = SCRIPT_DIR / "logs"
+
+LAUNCH_AGENTS_DIR = Path.home() / "Library" / "LaunchAgents"
+LABEL_PREFIX = "com.mitchell.linkedin"
 
 POSTS_API = "https://api.linkedin.com/rest/posts"
 IMAGES_API = "https://api.linkedin.com/rest/images"
@@ -241,9 +256,10 @@ def call_api(env: dict, payload: dict) -> tuple[int, dict, str]:
         return e.code, dict(e.headers), e.read().decode()
 
 
-def build_payload(env: dict, text: str, lifecycle: str,
-                  image_urn: str | None = None,
-                  scheduled_at_ms: int | None = None) -> dict:
+def build_payload(env: dict, text: str, image_urn: str | None = None) -> dict:
+    # LinkedIn's REST API (202503) does not support member-account post scheduling.
+    # lifecycleState "SCHEDULED" and scheduledAt are rejected with HTTP 422.
+    # Scheduling is handled via launchd; this function always builds an immediate-publish payload.
     payload: dict = {
         "author": env["LINKEDIN_AUTHOR_URN"],
         "commentary": text,
@@ -253,18 +269,159 @@ def build_payload(env: dict, text: str, lifecycle: str,
             "targetEntities": [],
             "thirdPartyDistributionChannels": [],
         },
-        "lifecycleState": lifecycle,
+        "lifecycleState": "PUBLISHED",
         "isReshareDisabledByAuthor": False,
     }
     if image_urn:
         payload["content"] = {"media": {"id": image_urn}}
-    if scheduled_at_ms:
-        payload["scheduledAt"] = scheduled_at_ms
     return payload
 
 
 # ---------------------------------------------------------------------------
-# Resolve draft path
+# launchd scheduling
+# ---------------------------------------------------------------------------
+
+def make_label(draft_path: Path) -> str:
+    """Derive a stable, reproducible launchd label from the draft filename."""
+    slug = draft_path.stem.lower()
+    slug = re.sub(r"[\s.]+", "-", slug)
+    return f"{LABEL_PREFIX}.{slug}"
+
+
+def make_plist_xml(label: str, draft_path: Path, slot: dt.datetime) -> str:
+    log = LOGS_DIR / f"{label}.log"
+    err = LOGS_DIR / f"{label}.err"
+    return f"""<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>{label}</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/bin/python3</string>
+        <string>{SCRIPT_DIR / "post.py"}</string>
+        <string>{draft_path}</string>
+    </array>
+    <key>WorkingDirectory</key>
+    <string>{SCRIPT_DIR}</string>
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Month</key>
+        <integer>{slot.month}</integer>
+        <key>Day</key>
+        <integer>{slot.day}</integer>
+        <key>Hour</key>
+        <integer>{slot.hour}</integer>
+        <key>Minute</key>
+        <integer>{slot.minute}</integer>
+    </dict>
+    <key>RunAtLoad</key>
+    <false/>
+    <key>StandardOutPath</key>
+    <string>{log}</string>
+    <key>StandardErrorPath</key>
+    <string>{err}</string>
+</dict>
+</plist>
+"""
+
+
+def schedule_one(file_path: Path, slot: dt.datetime, hook_letter: str | None,
+                 dry_run: bool) -> None:
+    raw = file_path.read_text()
+    fm, body = parse_frontmatter(raw)
+
+    if fm.get("status", "").strip() == "scheduled":
+        print(f"SKIP {file_path.name}: already scheduled "
+              f"(label: {fm.get('launchd_label', 'unknown')}). "
+              f"Run --unschedule first to reschedule.\n")
+        return
+
+    text = build_post_text(body, hook_letter)
+    if len(text) > 3000:
+        print(f"SKIP {file_path.name}: {len(text)} chars exceeds 3000 limit.")
+        return
+
+    label = make_label(file_path)
+    plist_path = LAUNCH_AGENTS_DIR / f"{label}.plist"
+    slot_str = slot.strftime("%Y-%m-%d %a %I:%M %p MT")
+
+    print("=" * 60)
+    print(f"Scheduling: {file_path.name}")
+    print(f"Slot:       {slot_str}")
+    print(f"Label:      {label}")
+    print(f"Plist:      {plist_path}")
+    print(f"Length:     {len(text)} characters")
+    print("-" * 60)
+    print(text)
+    print("=" * 60)
+
+    if dry_run:
+        print("[--dry-run] Not writing plist or registering with launchd.\n")
+        return
+
+    LOGS_DIR.mkdir(parents=True, exist_ok=True)
+    LAUNCH_AGENTS_DIR.mkdir(parents=True, exist_ok=True)
+    plist_path.write_text(make_plist_xml(label, file_path.resolve(), slot))
+
+    uid = str(os.getuid())
+    result = subprocess.run(
+        ["launchctl", "bootstrap", f"gui/{uid}", str(plist_path)],
+        capture_output=True, text=True,
+    )
+    if result.returncode != 0:
+        plist_path.unlink(missing_ok=True)
+        sys.exit(f"launchctl bootstrap failed:\n{result.stderr}")
+
+    fm["status"] = "scheduled"
+    fm["scheduled_for"] = slot_str
+    fm["launchd_label"] = label
+    file_path.write_text(serialize_frontmatter(fm, body))
+
+    print(f"Scheduled. Plist: {plist_path}\n")
+
+
+def unschedule_one(file_path: Path, dry_run: bool) -> None:
+    raw = file_path.read_text()
+    fm, body = parse_frontmatter(raw)
+
+    label = fm.get("launchd_label", "").strip() or make_label(file_path)
+    plist_path = LAUNCH_AGENTS_DIR / f"{label}.plist"
+    uid = str(os.getuid())
+
+    print(f"Unscheduling: {file_path.name}")
+    print(f"Label:        {label}")
+    print(f"Plist:        {plist_path}")
+
+    if dry_run:
+        print("[--dry-run] Not removing plist or running launchctl.\n")
+        return
+
+    result = subprocess.run(
+        ["launchctl", "bootout", f"gui/{uid}/{label}"],
+        capture_output=True, text=True,
+    )
+    if result.returncode != 0:
+        print(f"  Warning: launchctl bootout returned {result.returncode}: "
+              f"{result.stderr.strip()}")
+        print("  Continuing with plist removal and frontmatter revert.")
+
+    if plist_path.exists():
+        plist_path.unlink()
+        print(f"  Deleted: {plist_path}")
+    else:
+        print(f"  Plist not found (already removed?): {plist_path}")
+
+    for key in ("scheduled_for", "launchd_label"):
+        fm.pop(key, None)
+    fm["status"] = "draft"
+    file_path.write_text(serialize_frontmatter(fm, body))
+    print(f"  Reverted to status: draft\n")
+
+
+# ---------------------------------------------------------------------------
+# Resolve draft paths
 # ---------------------------------------------------------------------------
 
 def resolve_draft(file_arg: str) -> Path:
@@ -294,11 +451,9 @@ def resolve_image(fm: dict, draft_path: Path | None = None) -> Path | None:
         return None
     image_exts = {".jpg", ".jpeg", ".png", ".gif"}
     candidates = [p for p in ASSETS_DIR.iterdir() if p.suffix.lower() in image_exts]
-    # Exact stem match first
     for p in candidates:
         if p.stem.lower() == draft_path.stem.lower():
             return p
-    # Keyword match: any word in image stem appears in draft stem
     draft_words = set(draft_path.stem.lower().split("-"))
     for p in candidates:
         image_words = set(re.split(r"[-_ ]+", p.stem.lower()))
@@ -308,7 +463,7 @@ def resolve_image(fm: dict, draft_path: Path | None = None) -> Path | None:
 
 
 # ---------------------------------------------------------------------------
-# Publish / schedule
+# Publish (immediate)
 # ---------------------------------------------------------------------------
 
 def publish_one(file_path: Path, hook_letter: str | None, dry_run: bool, env: dict) -> None:
@@ -321,13 +476,12 @@ def publish_one(file_path: Path, hook_letter: str | None, dry_run: bool, env: di
         return
 
     image_path = resolve_image(fm, file_path)
-    image_label = f"  Image:    {image_path.name}" if image_path else ""
 
     print("=" * 60)
     print(f"Posting:  {file_path.name}")
     print(f"Length:   {len(text)} characters")
-    if image_label:
-        print(image_label)
+    if image_path:
+        print(f"Image:    {image_path.name}")
     print("-" * 60)
     print(text)
     print("=" * 60)
@@ -337,7 +491,7 @@ def publish_one(file_path: Path, hook_letter: str | None, dry_run: bool, env: di
         return
 
     image_urn = upload_image(env, image_path) if image_path else None
-    payload = build_payload(env, text, "PUBLISHED", image_urn=image_urn)
+    payload = build_payload(env, text, image_urn=image_urn)
     status, headers, body_resp = call_api(env, payload)
     if status != 201:
         print(f"Failed: HTTP {status}\n{body_resp}\n")
@@ -364,59 +518,12 @@ def publish_one(file_path: Path, hook_letter: str | None, dry_run: bool, env: di
     print(f"File:     {new_path}\n")
 
 
-def schedule_one(file_path: Path, slot: dt.datetime, hook_letter: str | None,
-                 dry_run: bool, env: dict) -> None:
-    raw = file_path.read_text()
-    fm, body = parse_frontmatter(raw)
-    text = build_post_text(body, hook_letter)
-
-    if len(text) > 3000:
-        print(f"SKIP {file_path.name}: {len(text)} chars exceeds 3000 limit.")
-        return
-
-    image_path = resolve_image(fm, file_path)
-    slot_str = slot.strftime("%Y-%m-%d %a %I:%M %p MT")
-
-    print("=" * 60)
-    print(f"Scheduling: {file_path.name}")
-    print(f"Slot:       {slot_str}")
-    print(f"Length:     {len(text)} characters")
-    if image_path:
-        print(f"Image:      {image_path.name}")
-    print("-" * 60)
-    print(text)
-    print("=" * 60)
-
-    if dry_run:
-        print("[--dry-run] Not scheduling.\n")
-        return
-
-    image_urn = upload_image(env, image_path) if image_path else None
-    scheduled_at_ms = int(slot.timestamp() * 1000)
-    payload = build_payload(env, text, "SCHEDULED",
-                            image_urn=image_urn,
-                            scheduled_at_ms=scheduled_at_ms)
-    status, headers, body_resp = call_api(env, payload)
-    if status != 201:
-        print(f"Failed: HTTP {status}\n{body_resp}\n")
-        return
-
-    post_urn = headers.get("x-restli-id") or headers.get("X-RestLi-Id") or ""
-
-    fm["status"] = "scheduled"
-    fm["scheduled_for"] = slot_str
-    fm["linkedin_post_urn"] = post_urn
-
-    file_path.write_text(serialize_frontmatter(fm, body))
-    print(f"Scheduled. URN: {post_urn}\n")
-
-
 # ---------------------------------------------------------------------------
-# Main
+# Draft loading
 # ---------------------------------------------------------------------------
 
 def load_drafts_ordered() -> list[Path]:
-    """Return all drafts sorted by priority frontmatter, then filename."""
+    """All drafts sorted by priority frontmatter, then filename."""
     drafts = []
     for p in DRAFTS_DIR.glob("*.md"):
         raw = p.read_text()
@@ -426,6 +533,20 @@ def load_drafts_ordered() -> list[Path]:
     return [p for p, _ in drafts]
 
 
+def load_scheduled_drafts() -> list[Path]:
+    """All drafts in DRAFTS_DIR with status: scheduled."""
+    result = []
+    for p in DRAFTS_DIR.glob("*.md"):
+        fm, _ = parse_frontmatter(p.read_text())
+        if fm.get("status", "").strip() == "scheduled":
+            result.append(p)
+    return result
+
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+
 def main() -> None:
     args = sys.argv[1:]
     if not args:
@@ -434,6 +555,7 @@ def main() -> None:
     dry_run = "--dry-run" in args
     post_all = "--all" in args
     do_schedule = "--schedule" in args
+    do_unschedule = "--unschedule" in args
     hook_letter = None
     if "--hook" in args:
         idx = args.index("--hook")
@@ -445,6 +567,48 @@ def main() -> None:
         start_date = dt.date.fromisoformat(args[idx + 1])
 
     env = load_env()
+
+    # --- Unschedule path (no LinkedIn token needed) ---
+    if do_unschedule:
+        if post_all:
+            drafts = load_scheduled_drafts()
+            if not drafts:
+                sys.exit("No scheduled drafts found.")
+            for draft in drafts:
+                unschedule_one(draft, dry_run)
+        else:
+            file_arg = next((a for a in args if not a.startswith("--")), None)
+            if not file_arg:
+                sys.exit("Provide a filename or --all.")
+            unschedule_one(resolve_draft(file_arg), dry_run)
+        return
+
+    # --- Schedule path (no LinkedIn token needed) ---
+    if do_schedule:
+        if post_all:
+            drafts = load_drafts_ordered()
+            if not drafts:
+                sys.exit("No drafts found in drafts folder.")
+            print(f"Found {len(drafts)} draft(s).\n")
+            anchor = start_date or next_monday()
+            slots = schedule_slots(anchor)
+            for draft in drafts:
+                fm_check, _ = parse_frontmatter(draft.read_text())
+                if fm_check.get("status", "").strip() == "scheduled":
+                    print(f"SKIP {draft.name}: already scheduled.\n")
+                    continue
+                schedule_one(draft, next(slots), hook_letter, dry_run)
+        else:
+            file_arg = next((a for a in args if not a.startswith("--")), None)
+            if not file_arg:
+                sys.exit("Provide a filename or --all.")
+            file_path = resolve_draft(file_arg)
+            anchor = start_date or dt.date.today()
+            slot = next(schedule_slots(anchor))
+            schedule_one(file_path, slot, hook_letter, dry_run)
+        return
+
+    # --- Immediate publish path (LinkedIn token required) ---
     check_token(env)
 
     if post_all:
@@ -452,22 +616,14 @@ def main() -> None:
         if not drafts:
             sys.exit("No drafts found in drafts folder.")
         print(f"Found {len(drafts)} draft(s).\n")
-
-        if do_schedule:
-            anchor = start_date or next_monday()
-            slots = schedule_slots(anchor)
-            for draft in drafts:
-                schedule_one(draft, next(slots), hook_letter, dry_run, env)
-        else:
-            for draft in drafts:
-                publish_one(draft, hook_letter, dry_run, env)
+        for draft in drafts:
+            publish_one(draft, hook_letter, dry_run, env)
         return
 
     file_arg = next((a for a in args if not a.startswith("--")), None)
     if not file_arg:
         sys.exit("Provide a filename or --all.")
-    file_path = resolve_draft(file_arg)
-    publish_one(file_path, hook_letter, dry_run, env)
+    publish_one(resolve_draft(file_arg), hook_letter, dry_run, env)
 
 
 if __name__ == "__main__":

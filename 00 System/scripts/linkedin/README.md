@@ -1,6 +1,6 @@
 ---
 type: readme
-updated: 2026-04-30
+updated: 2026-05-04
 ---
 
 ## What this is
@@ -8,7 +8,7 @@ updated: 2026-04-30
 Scripts that publish LinkedIn posts from vault draft files via the LinkedIn REST API. Two pieces:
 
 - `auth.py` — one-time OAuth setup; refreshes tokens when they expire
-- `post.py` — reads a draft file, posts it to LinkedIn, moves the file to `published/`
+- `post.py` — reads a draft file, posts it to LinkedIn (or schedules it via launchd)
 
 Both read credentials from `.env` (gitignored). See `.env.example` for the schema.
 
@@ -17,9 +17,10 @@ Both read credentials from `.env` (gitignored). See `.env.example` for the schem
 | File | Purpose |
 |---|---|
 | `auth.py` | OAuth 2.0 helper. Captures access + refresh tokens, fetches author URN. |
-| `post.py` | Publishes a single draft. Updates frontmatter, moves to `published/`. |
+| `post.py` | Publishes a single draft immediately, or schedules it via a launchd job. |
 | `.env.example` | Template for credentials. Copy to `.env` and fill in. |
 | `.env` | Real credentials (gitignored). Created by you + `auth.py`. |
+| `logs/` | stdout/stderr logs from launchd-fired jobs. Gitignored. |
 
 ## Setup (first time)
 
@@ -47,28 +48,65 @@ Both read credentials from `.env` (gitignored). See `.env.example` for the schem
    python3 post.py "../../../05 Content/LinkedIn/drafts/SOME-FILE.md" --dry-run
    ```
 
-## Daily use
+## Posting immediately
 
 After you've reviewed and finalized a draft in `05 Content/LinkedIn/drafts/`:
 
 ```bash
 cd "00 System/scripts/linkedin"
-python3 post.py "../../../05 Content/LinkedIn/drafts/2026-05-04-pillar3-cut-recap-emails.md"
+python3 post.py "../../../05 Content/LinkedIn/drafts/2026-05-04-my-post.md"
 ```
 
 The script:
 1. Reads frontmatter and body
 2. Extracts post text (looks for `## Final Post`, falls back to `## Post Body`)
-3. Prints the post for you to review
-4. Asks `Post to LinkedIn? [y/N]`
-5. On `y`: fires the API call
-6. On 201 success: updates frontmatter (`status: published`, `published`, `linkedin_url`) and moves the file to `published/`
+3. Prints the post for review
+4. Fires the LinkedIn API call
+5. On 201 success: updates frontmatter (`status: published`, `published`, `linkedin_url`) and moves the file to `published/`
+
+## Scheduling a post
+
+```bash
+# Schedule all unscheduled drafts (Mon/Tue/Thu/Fri at 8 AM MT)
+python3 post.py --all --schedule
+
+# Start from a specific date instead of the next Monday
+python3 post.py --all --schedule --start 2026-05-12
+
+# Schedule a single draft
+python3 post.py "my-draft.md" --schedule --start 2026-05-07
+```
+
+Scheduling does **not** use LinkedIn's API. Instead, the script:
+1. Picks a slot from the Mon/Tue/Thu/Fri 8 AM MT cadence
+2. Writes a launchd plist to `~/Library/LaunchAgents/com.mitchell.linkedin.<slug>.plist`
+3. Registers it with `launchctl bootstrap`
+4. Updates the draft's frontmatter: `status: scheduled`, `scheduled_for`, `launchd_label`
+
+When the job fires at the scheduled time, it calls `post.py` directly to publish immediately.
+
+Dry-run with `--dry-run` previews the slot, label, plist path, and post text without writing anything.
+
+## Unscheduling a post
+
+```bash
+# Unschedule a specific draft
+python3 post.py "my-draft.md" --unschedule
+
+# Unschedule all scheduled drafts
+python3 post.py --all --unschedule
+```
+
+Unscheduling:
+1. Runs `launchctl bootout` to deregister the job
+2. Deletes the plist from `~/Library/LaunchAgents/`
+3. Reverts the draft's frontmatter to `status: draft`, removing `scheduled_for` and `launchd_label`
 
 ## Choosing which hook to use (short-form posts)
 
 Drafts produced by the `linkedin-creator` skill have two hook options. Pick one of these workflows:
 
-**Option A — edit the file:** Add a `## Final Post` section with the exact text you want posted (chosen hook + body merged). The script publishes that.
+**Option A — add a Final Post section:** Add a `## Final Post` section with the exact text you want posted (chosen hook + body merged). The script publishes that.
 
 **Option B — pass a hook flag:**
 ```bash
@@ -92,8 +130,9 @@ Uses the stored refresh token to get a new access token without going through th
 
 - `.env` is in `.gitignore` at the vault root — never commit it
 - The script enforces LinkedIn's 3000-character limit before posting
-- `--dry-run` always runs without firing the API; use it any time you're unsure
-- Posts go live immediately on success — no scheduling, no draft state in LinkedIn
+- `--dry-run` always previews without posting or writing plists; use it any time you're unsure
+- Posts go live immediately on success — launchd fires the immediate-publish path at the scheduled time
+- LinkedIn's REST API does not support member-account post scheduling; `--schedule` uses launchd as the local workaround
 
 ## Troubleshooting
 
@@ -101,3 +140,5 @@ Uses the stored refresh token to get a new access token without going through th
 - **HTTP 403 on `post.py`** → app missing `w_member_social` scope; reauthorize after adding the product in LinkedIn Developer console, then re-run `auth.py`
 - **OAuth redirect mismatch** → make sure `LINKEDIN_REDIRECT_URI` in `.env` matches exactly what's registered in the LinkedIn app's Auth tab
 - **Author URN missing** → re-run `auth.py`; the userinfo call may have failed
+- **launchd job didn't fire** → check `logs/<label>.err`; also confirm the Mac was awake at fire time (launchd fires missed calendar-interval jobs on next wake if the system was asleep)
+- **`launchctl bootstrap` fails** → a job with that label may already be registered; run `--unschedule` first, then reschedule
