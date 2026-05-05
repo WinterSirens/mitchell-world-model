@@ -161,7 +161,7 @@ Then apply the appropriate branch of this 4-way decision tree:
 2. **Source material** (meeting notes, podcast takeaway, chat output, research scratch, web clippings) → distill any insight to the right file first. Then ask: will I re-read this source itself? If yes, move to `03 Sources/{subfolder}/`. If no, archive with `processed_into:`. Source preservation is the exception, not the default.
    - *Clippings* are a source material variant: pre-structured external articles with frontmatter (`title`, `source`, `author`, `published`, `created`, `description`, `tags: clippings`). Read the article body, identify the key insight, then decide destination: `02 Wiki/`, `01 World Model/03 Contexts/`, `03 Sources/Articles/`, or archive.
 3. **Journal entry** (reflection, processing, thinking out loud) → synthesize if ready; leave if it needs to settle. Archive only after synthesis with `processed_into:`.
-4. **Noise** (no extractable signal) → archive directly. No `processed_into:` field — its absence flags the note as either noise or under-processed.
+4. **Noise** (no extractable signal) → archive directly. No `processed_into:` field — its absence flags the note as either noise or under-processed. A bare URL is source material, not noise. An energy-only note is a capture that feeds the Weekly Brief energy inference. Only classify as noise when there is no URL, no energy, no topic, and no identifiable signal.
 
 Do not treat clippings or feedback as raw thought — they are input material to extract from, not personal state to preserve.
 
@@ -189,9 +189,9 @@ The note's tags and `type` frontmatter are the primary signal for what action is
 - `notion-capture` → skill trigger: `notion-capture`
 - `plugin-audit`, `mcp-install` → skill trigger: `plugin-security-audit`
 - `red-team` → skill trigger: `red-teaming`
-- `research-trigger` → decision artifact (Decision Memo or Active Plan) + queue deep research
+- `research-trigger` → decision artifact: create a research plan in `04 Decisions/Active Plans/` containing the research question, scope, and prompt. Do not execute deep research during the synthesis session; Mitchell runs research plans in separate sessions.
 - `decision-making` → if a real open decision exists, decision artifact; otherwise capture
-- `feedback` → world-model update (rules/state); if it's feedback on a skill, skill update
+- `feedback` → world-model update (rules/state); if the note names a specific skill, workflow change, or performance issue with a skill, route to `skill_update` first (modify the relevant `.claude/skills/.../SKILL.md`), then update world model if broader rules are also affected
 - `clipping` → source-material branch (distill, preserve only with re-retrieval reason)
 - `journal` → readiness check first; then capture or leave
 - `idea` → capture; check whether it's also a content idea worth handing to a skill
@@ -201,7 +201,7 @@ The note's tags and `type` frontmatter are the primary signal for what action is
 
 If a note carries a tag or `type` value not in the list above, do **not** guess silently. Surface the unknown tag in the triage summary with your best read of what work it implies (e.g., "`vendor-eval` — should this trigger `plugin-security-audit`?"). Once Mitchell confirms or corrects, append the new convention to the list in this section so the system gets smarter every week. Treat this as a standing instruction: every unfamiliar tag is an opportunity to extend the system.
 
-Surface every triggered action in the triage summary alongside the distillation. Approval is given per row — Mitchell can accept distillation but reject the artifact (or vice versa).
+Surface every triggered action in the triage summary alongside the distillation. Approval is given per row — Mitchell can accept distillation but reject the artifact (or vice versa). After Mitchell confirms the convention for an unknown tag, append it to the Known tag → action conventions list in this section immediately so the system learns.
 
 **Energy inference:** Energy/focus/stress readings on the Weekly Brief follow a defined paradigm so they're a comparable data point across weeks, not vibes. See `00 System/Templates/Weekly Synthesis.md` → "Energy inference rules" for the trust order and signals.
 
@@ -248,7 +248,7 @@ During a Weekly Synthesis session, process all inbox items in parallel by spawni
 
 **Shared destination conflict rule:** when two or more sub-agents propose changes to the same destination file (e.g., `Decision Rules.md`), the orchestrator merges those changes before writing — never overwrites one with another.
 
-**When to skip parallelization:** if the inbox contains 5 or fewer files, sequential processing is fine. Spin up parallel agents only when there are 6 or more files to process.
+**Always parallelize:** Every inbox item gets its own sub-agent, regardless of count. This prevents context bloat, improves speed, and keeps cost predictable per item.
 
 ## Core workflow
 
@@ -289,6 +289,7 @@ Distillation is the primary work. Preservation is the exception.
 - Extract the *delta* — the principles or actions that change behavior. Skip background, generic best practices, and structural mirroring of the original.
 - Preserve a source in `03 Sources/` only if you can name a specific re-retrieval reason (e.g., "I'll re-read the methodology while practicing it"). If a 30-line distillation captures the value, archive the source.
 - Test for "distilled enough": could a future agent act on this without re-reading the source? If yes, you're done. If it sounds generic, cut harder.
+- For long transcripts or articles: determine if the content directly impacts Mitchell's world model (decisions, rules, state). If yes, distill into the appropriate World Model or Wiki file. If no, create a brief summary in `02 Wiki/` (or preserve in `03 Sources/` with a named re-retrieval reason) with a link to the original. If unsure, surface the ambiguity in the triage summary and ask Mitchell during the approval pass.
 
 ## Log trail principle
 

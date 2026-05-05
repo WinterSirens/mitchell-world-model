@@ -11,8 +11,8 @@ You approve, adjust, or skip each item. The whole pass should take 20-30 minutes
 
 ## Weekly Synthesis Agenda
 
-### 1. Inbox triage (Claude reads 00 Inbox/)
-Claude reads every file in the inbox, then for each one asks:
+### 1. Inbox triage (Claude spawns one sub-agent per inbox file)
+Claude lists every file in `00 Inbox/` and spawns one sub-agent per file to classify and distill in parallel. For each item, the sub-agent asks:
 
 **Step A — Mode check:** "Is this a capture, journal entry, source material, or noise?"
 - Captures are ready to process immediately
@@ -49,7 +49,7 @@ The Weekly Brief's energy/focus/stress readings are not vibes — they follow a 
 Apply these signals in trust order. Higher-numbered signals only break ties when lower-numbered signals are silent or ambiguous.
 
 1. **Direct answer trumps inferred.** If Mitchell states energy/focus/stress directly during the session, use that and stop.
-2. **Inbox frontmatter aggregation.** Across this week's processed notes, average the `energy:` field where present. `High` = +1, `Low` = −1, blank = 0. A clear positive or negative average sets the baseline.
+2. **Inbox frontmatter aggregation.** Across this week's processed notes, average the `energy:` field where present. `High` = +1, `Low` = −1, blank = 0. Energy-only notes and short captures with energy frontmatter are valid data points. A clear positive or negative average sets the baseline.
 3. **Movement vs. Stalled ratio.** From Step 1's triage results plus Step 2's answers: count Movement items vs. Stalled items. ≥2:1 in favor of movement = energy holds or rises. Reverse ratio = energy lower than baseline.
 4. **Avoidance signal.** If the "What I'm avoiding" answer names "activation energy," "fear," "don't want to," or similar phrasing, focus drops by 1 step and stress rises by 1 step.
 5. **Surprise polarity.** Net-positive surprises bias energy up; net-negative surprises bias it down. A surprise income event reads positive; a missed deadline reads negative.
