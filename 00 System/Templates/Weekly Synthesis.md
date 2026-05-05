@@ -43,6 +43,22 @@ Answer these to update Current State.md:
 - Did anything shift in priorities, constraints, or risks?
 - What did I say yes to this week — was it right?
 
+#### Energy inference rules
+The Weekly Brief's energy/focus/stress readings are not vibes — they follow a defined paradigm so every synthesis produces a comparable data point. Over time these readings reveal patterns in how Mitchell's energy correlates with decision quality and execution speed.
+
+Apply these signals in trust order. Higher-numbered signals only break ties when lower-numbered signals are silent or ambiguous.
+
+1. **Direct answer trumps inferred.** If Mitchell states energy/focus/stress directly during the session, use that and stop.
+2. **Inbox frontmatter aggregation.** Across this week's processed notes, average the `energy:` field where present. `High` = +1, `Low` = −1, blank = 0. A clear positive or negative average sets the baseline.
+3. **Movement vs. Stalled ratio.** From Step 1's triage results plus Step 2's answers: count Movement items vs. Stalled items. ≥2:1 in favor of movement = energy holds or rises. Reverse ratio = energy lower than baseline.
+4. **Avoidance signal.** If the "What I'm avoiding" answer names "activation energy," "fear," "don't want to," or similar phrasing, focus drops by 1 step and stress rises by 1 step.
+5. **Surprise polarity.** Net-positive surprises bias energy up; net-negative surprises bias it down. A surprise income event reads positive; a missed deadline reads negative.
+6. **Capture velocity.** Count of inbox notes processed this week. Significantly above or below the rolling baseline is a focus signal worth flagging — high volume can mean either active engagement or scattered attention; weigh against signals 1–5.
+
+**When signals conflict, surface both in the brief instead of averaging silently.** Example: "Energy reads medium from direct answer, but movement ratio was 3:2 stalled — worth watching whether the felt energy is overstating actual capacity."
+
+**Improving the rules:** If a brief's reading doesn't match how the week actually felt, the rule that misfired is what gets updated. Note the mismatch in the next brief's "Patterns I notice" section so the paradigm sharpens over time.
+
 ### 3. Rules audit (brief)
 - Did any rule prove wrong or outdated this week?
 - Did anything happen that should graduate a provisional rule to durable?

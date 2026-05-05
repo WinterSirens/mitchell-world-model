@@ -643,6 +643,6 @@ After saving, confirm with the file path and ask: **"Want me to refine anything,
 
 ## Tool Integration
 
-This skill drafts and saves only. It never publishes, never calls `post.py`, and never triggers any LinkedIn API action.
+This skill drafts and saves only. It never publishes and never triggers any LinkedIn API action. The previous `post.py` automation has been removed — API autopublishing hurt engagement, so all publishing is now manual in the LinkedIn UI during the Golden Hour.
 
-Drafts save to `05 Content/LinkedIn/drafts/` in the Mitchell World Model vault. Mitchell reviews and edits from there, then manually runs `post.py` when he's ready to publish. After publishing, he updates frontmatter (`status`, `published`, `linkedin_url`) and moves the file to `05 Content/LinkedIn/published/`. Performance is logged monthly in `05 Content/LinkedIn/performance/YYYY-MM.md` and feeds skill improvement reviews. See `05 Content/LinkedIn/README.md` for the full convention.
+Drafts save to `05 Content/LinkedIn/drafts/` in the Mitchell World Model vault. Mitchell reviews, edits, and publishes manually in LinkedIn. After publishing, he updates frontmatter (`status`, `published`, `linkedin_url`) and moves the file to `05 Content/LinkedIn/published/`. Performance is logged monthly in `05 Content/LinkedIn/performance/YYYY-MM.md` and feeds skill improvement reviews. See `05 Content/LinkedIn/README.md` for the full convention.
