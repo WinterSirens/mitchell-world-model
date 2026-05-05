@@ -6,9 +6,10 @@
 .AppleDouble
 .LSOverride
 
-# Obsidian workspace state (open tabs, cursor position, etc.)
-.obsidian/workspace.json
-.obsidian/workspace-mobile.json
+# Obsidian vault config (local to each machine; only templates.json is shared)
+.obsidian/**
+!.obsidian/
+!.obsidian/templates.json
 
 # Secrets — LinkedIn API credentials live here
 00 System/scripts/linkedin/.env
