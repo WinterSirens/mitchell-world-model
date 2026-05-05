@@ -97,7 +97,7 @@ README.md
 
 **`00 System/`** — vault infrastructure. Templates, folder documentation, and other operating-layer files. Not personal content — this is the operating layer of the system itself.
 - `Templates/` — blank templates for new entries, including Obsidian Templater templates with `<% ... %>` syntax. This is where Obsidian and Templater are configured to look for templates.
-- `scripts/` — project utilities and automations (currently LinkedIn publishing scripts).
+- `scripts/` — project utilities and automations. (Currently empty — the LinkedIn publishing scripts were removed when API autopublishing was retired.)
 
 **`01 World Model/`** — the personal operating system. This is where Mitchell's current state, decision rules, recurring context patterns, and review history live. It is the active decision-support layer, not a reference archive. Keep this small, high-trust, and decision-relevant. It is the lens, not the warehouse.
 - `01 State/` — current conditions snapshot. Holds `Current State.md` which tracks present priorities, constraints, active risks, bottleneck, and open questions. Update when conditions materially change. No log trail needed — weekly synthesis in Reviews captures state evolution over time.
@@ -165,6 +165,46 @@ Then apply the appropriate branch of this 4-way decision tree:
 
 Do not treat clippings or feedback as raw thought — they are input material to extract from, not personal state to preserve.
 
+### Action triage (second pass — tag-driven)
+
+Distillation captures the *learning* from a note. Action triage decides whether the note also requires a *work artifact* — something concrete that needs to exist after this synthesis. Run this pass for every Capture and every ready Journal entry.
+
+The note's tags and `type` frontmatter are the primary signal for what action is required. Read them first, then confirm against the content. The inbox is both a knowledge channel *and* a work channel — tags declare intent, the agent executes.
+
+**Action axis (a single note can hit multiple):**
+
+1. **Knowledge-only** — distillation already handled it; no artifact needed. (Default; most notes.)
+2. **Wiki concept** — durable, evergreen, retrievable knowledge → create or update a note in `02 Wiki/`.
+3. **Decision artifact** — opens or advances a real decision → memo in `04 Decisions/Decision Memos/` or plan in `04 Decisions/Active Plans/`.
+4. **World Model update** — changes Mitchell's current state, rules, or context playbooks → update `01 World Model/01 State/`, `02 Rules/`, or `03 Contexts/`.
+5. **Skill trigger** — the note's content is the *input* to a project skill that should produce a downstream artifact. Invoke the matching skill and route output to the correct folder.
+6. **Skill update** — the note is *feedback on how a skill behaves* (workflow change, performance data) → modify the relevant `.claude/skills/.../SKILL.md` and log the change in the Weekly Brief.
+
+**Known tag → action conventions:**
+
+- `linkedin-idea`, `linkedin` → skill trigger: `linkedin-creator` → draft in `05 Content/LinkedIn/drafts/`
+- `prd-trigger`, `prd` → skill trigger: `ai-prd-builder`
+- `email-draft`, `email-sequence` → skill trigger: `email-sequence`
+- `comms-rewrite` → skill trigger: `rewrite-comms`
+- `notion-capture` → skill trigger: `notion-capture`
+- `plugin-audit`, `mcp-install` → skill trigger: `plugin-security-audit`
+- `red-team` → skill trigger: `red-teaming`
+- `research-trigger` → decision artifact (Decision Memo or Active Plan) + queue deep research
+- `decision-making` → if a real open decision exists, decision artifact; otherwise capture
+- `feedback` → world-model update (rules/state); if it's feedback on a skill, skill update
+- `clipping` → source-material branch (distill, preserve only with re-retrieval reason)
+- `journal` → readiness check first; then capture or leave
+- `idea` → capture; check whether it's also a content idea worth handing to a skill
+- `raw`, `inbox` → no action signal; treat as untagged
+
+**Unknown tag rule:**
+
+If a note carries a tag or `type` value not in the list above, do **not** guess silently. Surface the unknown tag in the triage summary with your best read of what work it implies (e.g., "`vendor-eval` — should this trigger `plugin-security-audit`?"). Once Mitchell confirms or corrects, append the new convention to the list in this section so the system gets smarter every week. Treat this as a standing instruction: every unfamiliar tag is an opportunity to extend the system.
+
+Surface every triggered action in the triage summary alongside the distillation. Approval is given per row — Mitchell can accept distillation but reject the artifact (or vice versa).
+
+**Energy inference:** Energy/focus/stress readings on the Weekly Brief follow a defined paradigm so they're a comparable data point across weeks, not vibes. See `00 System/Templates/Weekly Synthesis.md` → "Energy inference rules" for the trust order and signals.
+
 The synthesis is the mechanism that makes the system compound. Without it, the inbox fills and the World Model goes stale.
 
 ## Parallel inbox processing (multi-agent)
@@ -198,6 +238,13 @@ During a Weekly Synthesis session, process all inbox items in parallel by spawni
 > - `preserve_source`: `true` or `false`, with a named re-retrieval reason if true
 > - `processed_into`: the value to write into the `processed_into:` frontmatter field when archiving
 > - `archive_path`: the target path under `90 Archive/YYYY-MM/` for the original note
+> - `actions`: list of action-triage classifications. Each entry has:
+>     - `kind`: one of `knowledge_only`, `wiki_concept`, `decision_artifact`, `world_model_update`, `skill_trigger`, `skill_update`
+>     - `target`: the file path, skill name, or destination folder this action operates on
+>     - `payload`: for `skill_trigger`, the input prompt to pass to the skill; for others, a brief description of what to write
+>     - `tag_signal`: the tag or `type` value that triggered this action (or `null` if inferred from content)
+>   Multiple actions are allowed. Default to `[{"kind": "knowledge_only"}]` if no artifact is needed.
+> - `unknown_tags`: list of any tags or `type` values on the note that are not in AGENTS.md's Known tag conventions list. Empty array if none.
 
 **Shared destination conflict rule:** when two or more sub-agents propose changes to the same destination file (e.g., `Decision Rules.md`), the orchestrator merges those changes before writing — never overwrites one with another.
 
