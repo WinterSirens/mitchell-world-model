@@ -21,113 +21,63 @@ If the user shares a thought without specifying, default to Short-Form Post. If 
 
 ## Writing Voice
 
-Every piece of LinkedIn content produced by this skill must sound like the author wrote it, not like AI generated it. This voice guide is non-negotiable. Apply it to every draft.
+Every piece of LinkedIn content produced by this skill must sound like Mitchell wrote it, not like AI generated it. Apply this to every draft without exception.
 
 ### Core Identity
 
-Direct and warm. Professional doesn't mean cold. Every word earns its place, but efficiency never comes at the cost of genuine connection.
+Direct and warm. Contractions always: "I'm," "don't," "I've," "you're," "it's." Never "I am finding that" or "one can often" — those are AI tells.
 
-- **Contractions always**: "I'm," "don't," "I've," "you're," "it's." Speak like a person, not a press release. "I am finding that..." is a red flag. "I'm finding that..." is the floor.
+Exclamation points are natural and should be used where genuine enthusiasm exists. Double exclamations are fine when the moment calls for real energy. Never manufactured.
 
-### Natural Softeners
+### Intensifiers (these are Mitchell's — use them)
 
-These phrases are part of the authentic voice. Do NOT strip them as hedges. They signal genuine thinking, not uncertainty.
-
-Protect these as intentional voice markers:
-- "I guess"
-- "I think"
-- "I'm wondering if"
-- "I just"
-- "Yeah"
-- "Okay"
-- "Just to be clear"
-- "One thing to note"
-
-**The line to hold:** Hedges that bury the ask ("Maybe we could possibly consider...") are bad. Markers that show genuine thinking ("I think this is the piece most people skip") are good. The first hides the point. The second reveals how the person actually reasons.
-
-### Intensifiers
-
-Use these signature amplifiers instead of generic boosters like "very" or "extremely":
-
-- "crazy"
-- "super super"
-- "really really"
+- "super" / "super cool" / "hugely"
+- "so much"
+- "far too"
+- "deeply"
 - "genuinely"
-- "absolutely incredible"
-- "totally"
-- "completely"
-- "ridiculously"
-- "so so [adjective]"
+- "huge" (not "massive" or "significant")
 
-**Important:** Repetition for emphasis is intentional. "Really, really good" stays that way. Don't smooth it into "very good."
+Do not substitute: "crazy," "ridiculously," "absolutely incredible," "totally," "completely" — these are not Mitchell's amplifiers.
 
-### Sentence Starters
+### Sentence Starters (use these, not invented ones)
 
-Natural openings that sound like a real person thinking out loud:
-
-- "Yeah,"
-- "Okay,"
+- "I'm..."
 - "I just..."
 - "I think..."
-- "I guess..."
-- "Looks like..."
 - "I realized..."
-- "I'm trying to figure out..."
-- "I'm hoping..."
+- Short declarative openers: "Being a [X] is hard enough." / "Yesterday was..."
 
-**"So" rule:** Phase out "So" as a sentence-starter or filler launcher. It reads as AI throat-clearing.
+**"So" rule:** Don't open sentences with "So" as filler. Fine when it shows causation: "I rewrote it three times, so now I know exactly where it breaks."
 
-- **Bad:** "So, I've been thinking about this problem."
-- **Good:** "I've been thinking about this problem."
+### Voice Patterns (specific to Mitchell)
 
-"So" is fine when it actually shows causation: "I rewrote the prompt three times, so now I know exactly where it breaks." That's a real connector. The filler version is just verbal warm-up.
+- **Name people specifically.** Marily Nika, the cohort members, the colleague you helped — naming earns trust and reads as real.
+- **Short declarative one-liners stand alone.** "The future is bright!" is its own paragraph. Don't pad it into a sentence.
+- **Feeling and analysis coexist in adjacent sentences.** "Yesterday was a hard day but the future is going to accelerate even faster." Don't separate the emotion from the insight.
+- **Pop-culture / quote shorthand is welcome.** Parenthetical asides like "(IYKYK)" or brief quotes without over-explaining them are authentic.
+- **Warm direct CTAs feel personal.** "Feel free to message me," "Let's make sure this is a good fit for you" — this is how Mitchell invites action.
+- **When referencing AI tools, use their commonly known names.** Add a brief parenthetical if the name is unfamiliar: "Claude's extended thinking (the reasoning feature)." Don't assume the audience knows internal product names.
 
-### Product and Tool References
+### Hard Avoids
 
-When referencing AI tools or features, use the most widely recognized name and verify spelling. If using a less-common feature name, define it briefly in parentheses. Unfamiliar or fuzzy product names in the first few lines create reader confusion ("did I miss a launch?") and increase scroll-away.
+**Em dashes** — replace with parentheses, commas, or a line break. Em dashes are an AI tell.
 
-**Fails:** "I didn't watch a single tutorial when Claude Design launched."
-(If "Claude Design" isn't a recognized product, the reader pauses and bounces.)
+**Corporate jargon**: "leverage" (as a verb), "synergy," "robust," "outcomes," "methodology"
 
-**Passes:** "I didn't watch a single tutorial when Claude added artifacts (the inline code and design preview feature)."
-(Recognized name, brief clarification when needed.)
+**Hedge words that bury the point**: "maybe," "perhaps," "might consider"
 
-### Hard Avoid List
-
-Never use these in any draft:
-
-**Corporate openers**: "I hope this finds you well," "per my last email," "circling back," "just checking in"
-
-**True hedge words**: "maybe," "perhaps," "might consider"
-
-**Excessive apologizing**
-
-**Theatrical setup phrases** that announce what you're about to say instead of just saying it:
-- "Here's the real ask:" / "Here's what I need:"
-- "Here's the thing:" / "Let me be clear:"
-- "Bottom line:" / "At the end of the day:"
-
-**Em dashes**: Hard constraint, not a style suggestion. Replace with parentheses for tangential clarifications, commas or periods for breaks in thought, or line breaks for emphasis. Em dashes read as AI-generated.
-
-**Triple dashes as section dividers** inside body content
-
-**Corporate jargon**: "methodology," "leverage" (as a verb), "synergy," "circle back," "touch base," "deep dive," "robust," "outcomes"
-
-**LinkedIn-specific cringe**: "Agree?" as a standalone closer, "Thoughts?" with nothing else, "I'm humbled to announce," more than 2 emojis per post (see Pre-Publish Quality Gates), hashtag spam (3 max), the word "hustle" used unironically, "Let that sink in."
+**LinkedIn cringe**: "Agree?" as a standalone closer, "Thoughts?" with nothing else, "I'm humbled to announce," "Let that sink in," hashtag spam (3 max), "hustle" used unironically
 
 ### Voice Examples
 
-These examples show what the voice sounds like when it's working:
-
 > "I watched 3 people try to use AI at work last week. All 3 gave up within 20 minutes. The problem wasn't the tool. It was the approach."
-
-> "The best AI prompt I ever wrote was 4 words long. But it took me understanding WHY those 4 words worked to make it repeatable."
-
-> "Nobody talks about the 45 minutes of thinking that happens before you even open ChatGPT. That's where the real skill lives."
 
 > "I just realized the reason my AI workflows keep breaking isn't the prompts. It's that I never defined what 'good' looks like before I started."
 
-(The last example uses a natural softener ("I just") paired with a direct, specific observation. It sounds like a real person mid-thought, not an AI summarizing a concept.)
+> "Being a musician is hard enough. Here's why you should stop using Spotify. It's musician slavery!"
+
+> "I almost spent two months building an Ollama workaround. Then the product update shipped before my workaround did."
 
 ---
 
