@@ -432,8 +432,7 @@ When generating a post, note in the Post Notes whether this is a **value post**,
 ---
 
 ## Pre-Publish Quality Gates
-
-Before any draft ships, it must pass these four checks. If a check fails, rewrite. These are gates, not guidelines. Run them in order on every short-form post and confirm in the Post Notes that all four passed.
+Before any draft ships, it must pass these six checks. If a check fails, rewrite. These are gates, not guidelines. Run them in order on every short-form post and confirm in the Post Notes that all six passed.
 
 ### 1. Hook Test
 
@@ -475,6 +474,28 @@ Maximum 2 emojis per post. Never use emojis as standalone punctuation between se
 **Passes:** "Experiment first. Get stuck. THEN go find the tutorial that fills the specific gap you hit. 🔬"
 (One emoji, reinforcing the experiment moment.)
 
+### 5. Concrete Source Check
+
+Every post must be grounded in a concrete source: a recent build, client/cohort moment, conversation, mistake, observation, or tool update. If the post could have been written by anyone in the AI space, rewrite it around a specific Mitchell experience.
+
+**Fails:** "AI builders need to know when to wait."
+(True, but generic.)
+
+**Passes:** "I almost spent two months building an Ollama workaround. Then the product update shipped before my workaround did."
+(Specific, personal, and current.)
+
+### 6. Live Voice Preservation Check
+
+The final post must preserve Mitchell's natural voice. Do not "professionalize" drafts during editing or publishing. Formal rewrites have been correlated with weaker performance and a less authentic voice.
+
+Avoid substitutions like:
+- "However" for "But"
+- "one can often" for "I've done this"
+- "the true limitation lies" for "the real constraint is"
+- "utilize / leverage / encounter failure" for plain language
+
+If a sentence sounds like a polished LinkedIn essay instead of something Mitchell would say out loud, rewrite it.
+
 ---
 
 ## What to Avoid
@@ -482,6 +503,9 @@ Maximum 2 emojis per post. Never use emojis as standalone punctuation between se
 These are content traps that attract the wrong audience or destroy trust with The Stuck Implementer. Treat these as hard constraints, not suggestions.
 
 - **"AI tips and tricks" posts**: They attract people who want more tips, not systems. Wrong audience for the course.
+- **Metaphor-only AI advice**: The genie-rule post underperformed (82 impressions, 1 reaction). A metaphor can work only when paired with a concrete personal example or current work moment. Otherwise it drifts toward generic prompt advice.
+- **Broad thesis posts without a recent event**: The collaboration-trap post underperformed early (53 impressions, 1 reaction). If the post argues a broad principle, anchor it in something that happened this week.
+- **Over-formal live rewrites**: Published posts that were edited into phrases like "However," "the true limitation lies," and "one can often" lost the voice this skill is designed to protect. Do not smooth posts into corporate LinkedIn prose.
 - **Tool reviews and comparisons**: Positions you as a reviewer, not a teacher. The audience wants frameworks that survive tool changes.
 - **Hype posts** ("AI will change everything"): Your audience is tired of this. It destroys trust instantly.
 - **Prompt templates as standalone posts**: Creates dependency and undermines the course promise that the value is in the thinking, not the template.
@@ -522,9 +546,19 @@ When the user provides a topic, first identify which content pillar it maps to. 
 - **Audience**: The Stuck Implementer (see profile above)
 - **Tone**: Apply the Writing Voice above. Pattern-observation, direct, warm.
 - **Pillar**: Infer from content. Default to Pillar 2 (Reframe) if unclear.
-- **Length**: Follow the pillar's specs. General sweet spot is 800-1500 characters. Stay under 3000 characters (LinkedIn's limit). The first 2-3 lines must hook before the "see more" fold.
-- **Structure**: Strong opening hook (use the Hook Formula Bank), insight or story that reframes how they think about AI, one actionable takeaway (if the pillar calls for it), CTA matching the pillar type
+- **Length**: Follow the pillar's specs. General sweet spot is 600-1200 characters. Shorter and more personal is preferred when it preserves the idea. Do not add explanation just to make the post feel complete.
+- **Structure**: Start from a concrete source first: recent work, cohort moment, build moment, mistake, tool update, or conversation. Then extract one transferable lesson. Strong opening hook (use the Hook Formula Bank), insight or story that reframes how they think about AI, one actionable takeaway (if the pillar calls for it), CTA matching the pillar type.
 - **Hashtags**: 3 max, placed at the end, relevant to the topic. Avoid generic guru-adjacent tags like #Mindset, #Hustle, #Motivation that attract the wrong audience.
+
+### Current Performance Lessons (May 2026)
+
+Use these until newer performance data says otherwise:
+
+- Best engagement so far: timely product/work moment + personal near-miss + experiential question. Example pattern: "I almost built X, then Y shipped, so now I'm asking Z."
+- Best reach so far: AI PM bootcamp / real cohort context. Concrete work with real people is more credible than abstract AI frameworks.
+- Weakest pattern: metaphor-only or generic prompt-advice posts. They may be clever, but they do not yet show enough evidence of engagement.
+- Voice risk: posts perform worse as they become more formal. Preserve contractions, first-person specificity, and plain language.
+- Do not infer "shorter" alone as the lesson. The stronger lesson is concrete, personal, current, and less formal.
 
 ### Output Format
 
@@ -545,7 +579,7 @@ When the user provides a topic, first identify which content pillar it maps to. 
 **Visual recommendation:** [None / Single image / Carousel / Native video / Document post, with a brief note on why]
 **Best time to post:** [Suggested posting window based on content type]
 **Engagement prompt:** [What kind of comments this should generate]
-**Pre-Publish Quality Gates:** [Confirm Hook Test ✓, Validation Check ✓, Engagement Question ✓, Emoji Count ✓ all pass. If any fail, rewrite before delivering.]
+**Pre-Publish Quality Gates:** [Confirm Hook Test ✓, Validation Check ✓, Engagement Question ✓, Emoji Count ✓, Concrete Source Check ✓, Live Voice Preservation Check ✓ all pass. If any fail, rewrite before delivering.]
 ```
 
 ### Save to Vault

@@ -12,4 +12,4 @@ sentiment:
 <%* const title = await tp.system.prompt("Note title"); if (!title) { return; } await tp.file.rename(title); -%>
 **Trigger:** 
 
-**Content/Work to **
+**Content/Work to do:**
