@@ -23,6 +23,15 @@ _What changed from last week? How does this week's energy compare?_
 - Main energy drain:
 - What this energy level explains (from Movement/Stalled sections):
 
+## Prediction scorecard
+_Score last week's predictions. ✓ = right, ✗ = wrong, ~ = partial, ? = not yet testable._
+_If this is the first brief using the new template, skip this section._
+- [prediction]: [✓/✗/~/? — what actually happened]
+- [prediction]: [✓/✗/~/? — what actually happened]
+- [prediction]: [✓/✗/~/? — what actually happened]
+
+_Calibration note:_ [Any insight about prediction accuracy — over-optimistic? Accurate on certain types? Blind spots?]
+
 ## Priorities
 _Top 3 active priorities this week, in order._
 1. 
@@ -69,3 +78,11 @@ _What are the top 2-3 things that need to happen next week?_
 
 _What am I most uncertain or anxious about heading into next week?_
 - 
+
+## Predictions for next week
+_2-3 specific, falsifiable predictions. Be concrete enough to score next week._
+_Good predictions: "I will finish Break In tweaks and release it." / "The sync licensing conversation will confirm the pain point is real."_
+_Bad predictions: "Things will go well." / "I'll be more productive."_
+1. 
+2. 
+3. 

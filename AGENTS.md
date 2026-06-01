@@ -97,7 +97,9 @@ README.md
 
 **`00 System/`** — vault infrastructure. Templates, folder documentation, and other operating-layer files. Not personal content — this is the operating layer of the system itself.
 - `Templates/` — blank templates for new entries, including Obsidian Templater templates with `<% ... %>` syntax. This is where Obsidian and Templater are configured to look for templates.
-- `scripts/` — project utilities and automations. (Currently empty — the LinkedIn publishing scripts were removed when API autopublishing was retired.)
+- `scripts/` — project utilities and automations.
+  - `brief-patterns.sh` — longitudinal analyzer for Weekly Briefs. Extracts energy trends, bottleneck history, avoidance tracking, persistent open questions, recurring patterns, prediction accuracy, and planned-vs-actual comparisons. Run with `--last 4` during monthly synthesis or without args for all-time view.
+  - `linkedin-performance-scaffold.sh` — two modes: (1) default mode creates the monthly performance log pre-populated with published post filenames; (2) `--analyze` mode reads all performance logs and outputs per-pillar metrics, cross-month learnings, and proposed skill updates. The analyze output feeds the monthly synthesis LinkedIn review step.
 
 **`01 World Model/`** — the personal operating system. This is where Mitchell's current state, decision rules, recurring context patterns, and review history live. It is the active decision-support layer, not a reference archive. Keep this small, high-trust, and decision-relevant. It is the lens, not the warehouse.
 - `01 State/` — current conditions snapshot. Holds `Current State.md` which tracks present priorities, constraints, active risks, bottleneck, and open questions. Update when conditions materially change. No log trail needed — weekly synthesis in Reviews captures state evolution over time.
@@ -206,6 +208,29 @@ Surface every triggered action in the triage summary alongside the distillation.
 **Energy inference:** Energy/focus/stress readings on the Weekly Brief follow a defined paradigm so they're a comparable data point across weeks, not vibes. See `00 System/Templates/Weekly Synthesis.md` → "Energy inference rules" for the trust order and signals.
 
 The synthesis is the mechanism that makes the system compound. Without it, the inbox fills and the World Model goes stale.
+
+### Prediction tracking
+
+The Weekly Brief template includes a prediction-and-scoring loop. At the end of each brief, Mitchell writes 2-3 specific, falsifiable predictions for the coming week. The following week's brief opens with a scorecard that scores those predictions (✓/✗/~/?) and notes calibration insights. Over time, this builds a dataset of prediction accuracy that the monthly synthesis reviews for systematic bias. The standalone Weekly Review template has been retired — prediction tracking now runs inside the brief cadence.
+
+## Monthly synthesis workflow
+
+Once a month (first week of the month, or whenever a month boundary passes), open a session and say "let's do the monthly synthesis." This is the zoom-out complement to the weekly synthesis — it reviews longitudinal patterns, audits rule health, recalibrates priorities, and feeds LinkedIn performance data back into the skill. See `00 System/Templates/Monthly Synthesis.md` for the full agenda.
+
+The monthly synthesis relies on two scripts in `00 System/scripts/`:
+- `brief-patterns.sh --last 4` — pre-computes the longitudinal view so the session starts with data, not research.
+- `linkedin-performance-scaffold.sh --analyze` — aggregates LinkedIn performance across months and surfaces proposed skill updates.
+
+Key monthly synthesis steps (see template for full agenda):
+1. Energy and momentum review (from brief-patterns output)
+2. Prediction calibration (scoring accuracy, detecting bias)
+3. Rule health audit (test, graduate, retire, or create rules)
+4. Context playbook audit (staleness check, missing playbooks)
+5. Active plan staleness check
+6. LinkedIn performance review → skill updates
+7. Wiki and knowledge audit
+8. Priority recalibration
+9. System health check
 
 ## Parallel inbox processing (multi-agent)
 

@@ -1,6 +1,8 @@
 ---
 type: weekly-review-template
-status: active
+status: retired
+retired: 2026-06-01
+reason: Prediction tracking merged into Weekly Brief template. Calibration loop now runs inside the brief cadence instead of requiring a separate process.
 ---
 
 # Weekly Review
