@@ -319,12 +319,9 @@ Spend 15-20 minutes before posting leaving thoughtful comments on 5-10 posts fro
 
 ### Build Engagement Prompts Into the Post
 
-Every post should end with a specific question that is easy to answer in 1-2 sentences. Not "thoughts?" Not "agree?" A concrete question tied to the post's claim:
-- "What's the prompt you spent the longest writing this week?"
-- "Which of these 4 do you already do?"
-- "What's the AI thing you tried once and gave up on?"
+As of June 2026, ending posts with questions has not driven meaningful engagement at Mitchell's current audience size. Instead, drive saves and bookmarks as the primary engagement signal. Position posts as reference assets readers will want to return to — saves compound into future reach through the algorithm.
 
-Easy-to-answer questions drive comments. Comments drive reach.
+When audience size grows and comments begin flowing organically, this section can be revisited and reinstated.
 
 ### Timing (General Guidance)
 
@@ -386,13 +383,21 @@ Before any draft ships, it must pass these six checks. If a check fails, rewrite
 
 ### 1. Hook Test
 
-The first 1-2 lines must name the reader's frustration, situation, or curiosity. If the hook describes the author's behavior or success without first naming what the reader is going through, rewrite.
+The first sentence must give the reader a reason to keep reading — not just scroll past. The hook earns the next sentence. It can name the reader's frustration, make a bold claim, state a contrarian position, or create curiosity through an unexpected admission. If the first sentence is generic or fails to create forward momentum, the reader is already gone.
+
+**Structure requirement:** The hook must land within the first sentence, not the first paragraph. The reader decides whether to read the second sentence based on the first one.
 
 **Fails:** "I didn't watch a single tutorial when [tool] launched. I just dove in and broke things."
-(About the author. Reader has no entry point.)
+(About the author. Reader has no entry point. Nothing pulls them forward.)
+
+**Fails:** "AI can help a non-technical person build a full stack product."
+(Generic observation. Reader has heard this before. No reason to read the next sentence.)
 
 **Passes:** "You've spent 45 minutes trying to get AI to do something that took 10 minutes manually. That's not a skill problem."
-(Names the reader's exact experience.)
+(Names the reader's exact experience in sentence one, then recontextualizes it in sentence two.)
+
+**Passes:** "This is the most important post I'll ever write on LinkedIn."
+(Bold claim. Reader reads sentence two to find out why.)
 
 ### 2. Validation Check
 
@@ -404,11 +409,15 @@ Before the post prescribes any behavior ("do X," "try Y," "stop doing Z"), it mu
 
 ### 3. Engagement Question
 
-Every short-form post must end with a specific, easy-to-answer question tied to the post's claim. Directives ("go do X," "try this today") do not count. Generic prompts ("thoughts?", "agree?") do not count.
+As of June 2026, posts at Mitchell's current stage on the platform perform better without ending on a question. Questions ("Which gear are you stuck in?", "What's the AI workflow you tried and gave up on?") have not driven meaningful engagement at this audience size. Instead, end posts with a conviction-driven close or a save/bookmark prompt that positions the post as a future reference asset.
 
-**Fails:** "Go break something today."
+**Passes:** "Save this. Bookmark it however you can. In a year from now, it'll be your most valuable asset."
 
-**Passes:** "What's the AI workflow you tried, gave up on, and would try again if you had a clearer frame?"
+**Passes:** A strong declarative close that doesn't ask the reader to do anything but think.
+
+**Still avoid:** Generic prompts ("thoughts?", "agree?"), directives ("go do X today"), or any standalone question as the final line.
+
+**When to revisit:** If audience and engagement volume grows to a point where comments are reliably flowing, this gate can be reinstated as a soft guideline rather than a hard rule.
 
 ### 4. Emoji Count
 
